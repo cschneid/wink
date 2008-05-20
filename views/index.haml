@@ -1,0 +1,13 @@
+
+#body.index
+  - @entries.each do |entry|
+    %div{ :class => "entry #{entry.class.name.downcase}" }
+      %h3
+        = entry_ref(entry)
+      %p.meta.caps
+        = entry.created_at.strftime('%A, %B %d, %Y at %I:%M %p')
+        -if entry.kind_of?(Document)
+          \/ By Ryan Tomayko
+        -if entry.domain
+          = "/ #{entry.domain}"
+      ~ content_filter(entry.summary, :markdown)

@@ -1,0 +1,39 @@
+#header
+  %h1= @title
+  %p
+    Regarding the
+    <a href='/writings/'>Writings</a>
+    of
+    <a href='/'>Ryan Tomayko</a>
+
+#comments
+  %ol.comments
+    - @comments.each do |c|
+      %li{ :id => c.id, :class => "comment #{c.spam? ? 'spam' : 'ham'} container" }
+        %h3
+          -if c.author_link?
+            %a.commentor{ :href => h(c.author_link) }= h(c.author)
+          -else
+            %span.commentor= h(c.author)
+          &nbsp;on&nbsp;
+          = entry_ref(c.entry)
+        %div.body
+          ~ sanitize(content_filter(c.body_with_links, :markdown))
+        -if admin?
+          %form{:action=>"/comments/#{c.id}",:style=>'display:none'}
+            %div
+              ~ textarea(:body, c.body, :rows => 5)
+              %input{:type=>'submit',:value=>'Save'}
+        %p.comment-meta
+          = c.created_at.strftime("%a, %b %d, %Y")
+          at
+          = c.created_at.strftime("%I:%M %p")
+
+          -if admin?
+            %a{:href => "/comments/#{c.id}", :class => 'edit' }Edit
+            |
+            %a{:href => "/comments/#{c.id}", :rel => 'delete' }Delete
+            |
+          %a{:href => entry_url(c.entry) + "#comment-#{c.id}"}#
+
+-# vim: ts=2 sw=2 sts=0 expandtab tw=120

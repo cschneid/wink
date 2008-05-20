@@ -1,0 +1,29 @@
+#content.entry
+
+  %form#draft{ :action => '/drafts/', :method => 'POST' }
+    = input(:hidden, :id, @entry.id)
+
+    #header
+      - if @entry.id
+        %p.admin= "« #{entry_ref(@entry, 'Leave As Is', :accesskey => 'r')} »"
+      %p= textbox(:slug, @entry.slug || '<slug>')
+      %h1#title= textbox(:title, @entry.title || '<title>')
+      %p.date= h(@entry.created_at.strftime('%A, %B %d, %Y'))
+      %p
+        <a class='author' href='/'>Ryan Tomayko</a>
+
+    #body
+      %p~ textarea(:summary, @entry.summary || '<summary>', :rows => 2)
+      %p
+        <label for='format'>Format</label>
+        = selectbox :filter, @entry.filter, %w[markdown html text].map{|t| [t,t]}
+      %p~ textarea(:body, @entry.body, :rows => 15)
+      %p
+        <label for='tags'>Tags</label><br>
+        = textbox :tag_names, @entry.tags.join(' ')
+      %p.buttons
+        -unless @entry.published?
+          <input type='submit' value='Save Draft'>
+        <input type="submit" name='publish' value='Publish'>
+
+-# vim: tw=120 ts=2 sw=2 sts=0 expandtab

@@ -1,0 +1,485 @@
+/* naeblis.css v4
+ *---------------------------------------------------------------------------
+ * Copyright (C) 2005-08 Ryan Tomayko <r@tomayko.com>
+ */
+
+body {
+	font-size: 81.25%;   /* 13px */
+	font-family: Verdana, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+	line-height: 1.538;  /* 20px */
+	color: #223;
+	background-color: #fff;
+	letter-spacing: 0.01em;
+	margin:0 10px;
+}
+
+#container {
+	max-width:48em;
+	margin:50px auto 10px auto;
+}
+
+
+table {
+	font-family: Verdana, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+	font-size:11px;
+}
+
+p, ul, ol, dl, pre {
+	margin:10px 0
+}
+
+i, em {
+	font-style: italic;
+}
+
+b, strong {
+	font-weight: bold;
+	color: #000;
+}
+
+dl {
+	margin-left: 40px
+}
+
+dt {
+	font-weight: bold;
+	color: #000;
+}
+
+hr {
+	color: #eee;
+	background-color: #ccc;
+	border: 0;
+	height: 1px;
+	margin: 30px 0;
+}
+
+blockquote {
+	margin: 20px 60px 20px 30px;
+	padding: 0;
+	color: #556;
+}
+
+blockquote em {
+	color:#001;
+}
+
+blockquote strong {
+	color:#001;
+	font-weight: normal;
+}
+
+tt, pre, code, samp, kbd {
+	color: #000;
+	font-size: 13px;
+	font-family: Consolas, 'Lucida Console', 'Bitstream Vera Sans Mono',
+		'Courier New', monospace;
+}
+
+pre {
+	color: #333;
+	background-color: #f9f9f9;
+	padding: 6px 4px 4px 6px;
+	border: 1px solid #eee;
+	border-left-width:20px;
+	line-height: 1.1;
+}
+
+code {
+	color: #007A00;
+}
+
+pre code {
+	color: #333;
+}
+
+a, a:link {
+	color:#023;
+	background:#eef;
+}
+
+a:visited {
+	color:#345;
+	background:#fff;
+}
+
+a:hover {
+	background:#ccf;
+	color:#000;
+	text-decoration:none;
+}
+
+/* Headings
+--------------------------------------------------------------------------- */
+
+h1, h2, h3 {
+	font-family:Georgia,'Bitstream Vera Sans Serif','Lucida Grande',Helvetica,Verdana,Arial,sans-serif;
+	font-weight:normal;
+	letter-spacing:-0.05em;
+	color:#000;
+}
+
+h1 {
+	font-size:2.461em;   /* 32px */
+	line-height:1.428;
+	margin:20px 0;
+}
+
+h2 {
+	font-size:23px;
+	line-height:1.36363636; /* repeating, of course */
+	margin:20px 0;
+}
+
+h3 {
+	font-size:18px;
+	line-height:1.1;
+	margin:30px 0 10px 0;
+}
+
+h4 {
+	font-size:13px;
+	font-weight:bold;
+	line-height:1.538;
+	margin:10px 0 10px 0;
+}
+
+/* Tables
+--------------------------------------------------------------------------- */
+
+table {
+	margin:10px 0;
+	width:100%;
+	border-style:none;
+	border-color:#ddd;
+	padding:0;
+}
+
+th, td {
+	padding: 4px 10px 4px 5px;
+	border-style:solid;
+	border-color:#fff;
+}
+
+th {
+	font-weight: bold;
+	background: #eef;
+}
+
+td {
+	background: #f9f9f9;
+}
+
+tfoot {
+	font-style: italic;
+}
+
+caption {
+	background: #eee;
+}
+
+/* Header / Titling
+--------------------------------------------------------------------------- */
+
+#header {
+	text-align:center;
+	margin:20px 20px;
+}
+
+#header h1 {
+	margin:0;
+}
+
+#header h1 a, #header h1 a:link, #header h1 a:visited, #header h1 a:hover {
+	color:#000;
+	text-decoration:none;
+	background:#fff;
+}
+
+#header p {
+	margin: 0;
+	color: #777;
+	text-transform: capitalize;
+	font-variant: small-caps;
+}
+
+#header p:first-child kdjshf {
+	margin-bottom:-3px;
+}
+
+#header a, #header a:link, #header a:visited {
+	color:#445;
+	background:#fff;
+}
+
+#header a:hover {
+	background:#ccf;
+	color:#000;
+	text-decoration:none;
+}
+
+#header .email, #header .site {
+	text-transform:none;
+	font-variant:normal;
+}
+
+/* Appendix
+--------------------------------------------------------------------------- */
+
+#appendix {
+	margin-top: 30px;
+	border-top: 1px solid #ddd;
+}
+
+/* Comments
+--------------------------------------------------------------------------- */
+
+ol.comments {
+	margin:20px 0px;
+	padding-left:25px;
+}
+
+ol.comments > li {
+	margin-top:20px;
+	margin-bottom:60px;
+}
+
+ol.comments h3 {
+	font-size:18px;
+	color:#555;
+}
+
+ol.comments h3 .commentor {
+	font-family: Verdana, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+}
+
+ol.comments .comment-meta {
+	text-align: right;
+	color: #555;
+}
+
+ol.comments .commentor {
+	color:#000;
+	background:#fff;
+}
+
+#comments form.leave {
+	margin-left: 40px;
+}
+
+#comments form.leave textarea {
+	width: 100%;
+}
+
+/* Admin stuff
+--------------------------------------------------------------------------- */
+
+li.comment textarea {
+	width: 100%;
+}
+
+li.comment form {
+	text-align: center;
+}
+
+#draft input[type=text], form#draft textarea {
+	width:100%;
+	padding:4px;
+	border:1px dotted #ddd;
+	font-size:inherit;
+	text-align:inherit;
+	font-family:inherit;
+	color:inherit;
+}
+
+#draft #summary {
+	text-align: center;
+}
+
+#draft textarea#body {
+	font-family:Consolas;
+}
+
+form .buttons {
+	text-align: center;
+}
+
+#header .admin {
+	margin-top:-20px;
+}
+
+/* Footer
+--------------------------------------------------------------------------- */
+
+#footer {
+	clear: both;
+	color: #555;
+	font-size: 11px;
+	line-height: 1.818181818182;
+	border-top:1px solid #ddd;
+	padding: 19px 0 0 0;
+	margin: 40px 0 20px 0;
+}
+
+#footer p {
+	margin:0;
+}
+
+#footer form {
+	float:right;
+}
+
+#footer input{
+	font-size:10px;
+}
+
+/* Misc Helper Classes
+--------------------------------------------------------------------------- */
+
+ul.clean, ol.clean {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.caps {
+	font-variant:small-caps;
+}
+
+/* Index Pages
+--------------------------------------------------------------------------- */
+
+body#home #header p {
+	font-size:11px
+}
+
+div.index {
+	text-align: center;
+	max-width: 34.5em;
+	margin: 40px auto;
+}
+
+.index .bookmark h3 {
+	font-size: 13px;
+	line-height: 1.7;
+	font-family: Verdana, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+	margin: 0 0 5px 0;
+}
+
+.index .bookmark p, .index .bookmark p.meta {
+	font-size: 11px;
+	margin: 5px 0;
+	font-family: Verdana, Helvetica, 'Bitstream Vera Sans', Arial, sans-serif;
+}
+
+.index .bookmark {
+	margin: 40px 0;
+}
+
+.index .post, .index .article {
+	margin: 60px 0;
+	padding: 0;
+}
+
+.index .post h3, .index .article h3 {
+	font-size: 23px;
+	line-height: 1.36363636; /* repeating, of course */
+	margin: 0 0 0 0;
+}
+
+.index p.meta { 
+	color: #555;
+	margin: 5px;
+}
+
+/* Print Styles
+--------------------------------------------------------------------------- */
+
+@media print {
+	html, body, #container {
+		margin:0;
+	}
+	#container {
+		width:100%;
+		max-width:100%;
+	}
+	#header {
+		margin-top:0;
+	}
+	#footer {
+		display:none;
+	}
+	a, a:link, a:visited {
+		color:#000;
+		background:#fff;
+		text-decoration:none;
+	}
+	@page {
+		size:8.5in 11in;
+	}
+}
+
+
+/* Resume Stuff
+-------------------------------------------------------------------------- */
+
+.chrono h3 {
+	margin-bottom:0;
+}
+.chrono p.period {
+	text-align:right;
+	font-weight:bold;
+}
+.chrono p.biz {
+	float:left;
+}
+.chrono .stuff {
+	clear:all;
+}
+.chrono li li {
+	list-style-type:disc;
+}
+
+@media print {
+	.chrono p.biz a {
+		font-weight:bold;
+	}
+}
+
+/* Prettify CSS
+--------------------------------------------------------------------------- */
+
+.str { color: #181; font-style:italic; }
+.kwd { color: #369; }
+.com { color: #666; }
+.typ { color: #c40; }
+.lit { color: #900; }
+.pun { color: #000; font-weight: bold; }
+.pln { color: #333; }
+.tag { color: #369; font-weight: bold; }
+.atn { color: #939; font-weight: bold }
+.atv { color: #181; }
+.dec { color: #606; }
+
+@media print {
+  .str { color: #060; }
+  .kwd { color: #006; font-weight: bold; }
+  .com { color: #600; font-style: italic; }
+  .typ { color: #404; font-weight: bold; }
+  .lit { color: #044; }
+  .pun { color: #440; }
+  .pln { color: #000; }
+  .tag { color: #006; font-weight: bold; }
+  .atn { color: #404; }
+  .atv { color: #060; }
+}
+
+
+
+/* IE Hacks
+--------------------------------------------------------------------------- */
+
+* html body{width:52em}
+* html div.index{width:34.5em}
+
+
+/* vim: set ft=css ts=4 sw=4 noexpandtab: */

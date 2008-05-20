@@ -1,0 +1,31 @@
+
+# Basic Weblog Configuration
+
+Weblog::configure do |conf|
+  conf.name = 'Your Weblog Name Here'
+  conf.url = 'http://localhost:4567'
+  conf.username = 'admin'
+  conf.password = 'password'
+end
+
+# Database Configuration
+
+DataMapper::Database.setup \
+  :adapter    => 'mysql',
+  :host       => 'localhost',
+  :username   => 'root',
+  :password   => '',
+  :database   => 'wink_development'
+
+
+# Akismet Configuration
+
+
+# Uncomment the following to enable del.icio.us bookmark synchronization
+Bookmark.configure do |del|
+  # del.user = 'YOUR DELICIOUS USERNAME'
+  # del.password = 'YOUR DELICIOUS PASSWORD'
+  del.cache_path = 'bookmarks.xml'
+end
+
+# vim: ft=ruby

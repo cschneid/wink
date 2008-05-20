@@ -1,0 +1,75 @@
+#content.entry
+
+  #header
+    - if admin?
+      %p.admin= "« #{draft_ref(@entry, 'Revise', :accesskey => 'r')} »"
+    %h1#title= h(@entry.title)
+    %p.date= h(@entry.created_at.strftime('%A, %B %d, %Y'))
+    %p
+      <a class='author' rel='index' href='/'>Ryan Tomayko</a>
+
+  #body
+    ~ content_filter(@entry.body, @entry.filter)
+
+  #appendix
+    %p
+      This entry has been tagged
+      = @entry.tags.map { |t| topic_ref(t) }.join(', ')
+      &mdash; follow a tag for an archive of related essays, weblog entries,
+      and bookmarks.
+    -if @related && @related.any?
+      #related
+        %p We think the following may be related to this entry as well:
+        %ul#related
+          - @related.each do |entry|
+            %li
+              = entry_ref(entry)
+
+  #comments
+    -if @comments && @comments.any?
+      %h2 Discuss
+      %ol.comments
+        - @comments.each do |c|
+          %li.comment.container{:id=>"comment-#{c.id}"}
+            .body
+              ~ sanitize(content_filter(c.body_with_links, :markdown))
+            -if admin?
+              %form{:action=>"/comments/#{c.id}",:style=>'display:none'}
+                %div
+                  ~ textarea :body, c.body, :rows => 5
+                  <input type='submit' value='Save'>
+            %p.comment-meta
+              &mdash; 
+              -if c.author_link?
+                %a.commentor{:href => h(c.author_link)}= h(c.author)
+              -else
+                %span.commentor= h(c.author)
+              on
+              = c.created_at.strftime("%A, %B %d, %Y")
+              at
+              = c.created_at.strftime("%I:%M %p")
+              -if admin?
+                %a{:href => "/comments/#{c.id}", :class => 'edit' }Edit
+                |
+                %a{:href => "/comments/#{c.id}", :rel => 'delete' }Delete
+                |
+              %a{:title=>'Permanent link to this comment', :href=>"#comment-#{c.id}"}#
+
+    %h2 Leave a comment
+    %form.leave{ :action => "#{request.url}/comment", :method => "post" }
+      %div
+        %label{:for => 'comment_author'} Name
+        %br
+        %input{:type => 'text', :name => 'author', :id => 'comment_author'}
+        %br
+        %label{:for => 'comment_url'} URL
+        %br
+        %input{:type => 'text', :name => 'url', :id => 'comment_url'}
+        %br
+        %label{:for => 'comment_body'} Comment
+        %small (syntax: <a href="http://daringfireball.net/projects/markdown/syntax" title="Markdown Syntax Reference">markdown</a>)
+        %br
+        %textarea{:name => 'body', :id => 'comment_body', :style => 'width:100%', :rows => 8 }= ''
+        %input{:type => 'submit', :value => 'Leave Comment'}
+
+-# vim: tw=120 ts=2 sw=2 sts=0 expandtab
