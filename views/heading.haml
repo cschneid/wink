@@ -3,6 +3,8 @@
     The various <a href='/writings/'>writings</a>
     and <a href='/linkings/'>linkings</a> of
   %h1
-    <a href='/'>Ryan Tomayko</a>
+    <a href='/'>
+    = @author
+    </a>
   %p
     = (2003..Date.today.year).to_a.map{ |y| "<a href='/circa/#{y}/'>#{y}</a>" }.join(', ')

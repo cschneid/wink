@@ -6,7 +6,9 @@
     %h1#title= h(@entry.title)
     %p.date= h(@entry.created_at.strftime('%A, %B %d, %Y'))
     %p
-      <a class='author' rel='index' href='/'>Ryan Tomayko</a>
+      <a class='author' rel='index' href='/'>
+      = @author 
+      </a>
 
   #body
     ~ content_filter(@entry.body, @entry.filter)

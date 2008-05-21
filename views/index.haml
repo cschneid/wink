@@ -7,7 +7,8 @@
       %p.meta.caps
         = entry.created_at.strftime('%A, %B %d, %Y at %I:%M %p')
         -if entry.kind_of?(Document)
-          \/ By Ryan Tomayko
+          \/ By 
+          = @author
         -if entry.domain
           = "/ #{entry.domain}"
       ~ content_filter(entry.summary, :markdown)

@@ -593,6 +593,7 @@ end
 
 get '/' do
   redirect '/', 301 if params[:page]
+  @author = Weblog.author
   @title = Weblog.title
   @entries = Entry.published(:limit => 50)
   haml :home
@@ -636,6 +637,7 @@ get '/writings/:slug' do
   @entry = Article.first(:slug => params[:slug])
   raise Sinatra::NotFound unless @entry
   require_administrative_privileges if @entry.draft?
+  @author = Weblog.author
   @title = @entry.title
   @comments = @entry.comments
   haml :entry
@@ -643,6 +645,7 @@ end
 
 get '/drafts/' do
   require_administrative_privileges
+  @author = Weblog.author
   @entries = Entry.drafts
   haml :home
 end
@@ -650,6 +653,7 @@ end
 get '/drafts/new' do
   require_administrative_privileges
   @title = 'New Draft'
+  @author = Weblog.author
   @entry = Article.new(
     :created_at => Time.now,
     :updated_at => Time.now,
@@ -660,6 +664,7 @@ end
 
 post '/drafts/' do
   require_administrative_privileges
+  @author = Weblog.author
   @entry =
     if params[:id].nil? || params[:id].empty?
       Article.new
@@ -677,6 +682,7 @@ end
 
 get '/drafts/:slug' do
   require_administrative_privileges
+  @author = Weblog.author
   @entry = Entry.first(:slug => params[:slug])
   raise Sinatra::NotFound unless @entry
   @title = @entry.title
@@ -689,6 +695,7 @@ mime :atom, 'application/atom+xml'
 
 get '/feed' do
   @title = Weblog.writings
+  @author = Weblog.author
   @entries = Article.published(:limit => 10)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
@@ -696,6 +703,7 @@ end
 
 get '/linkings/feed' do
   @title = Weblog.linkings
+  @author = Weblog.author
   @entries = Bookmark.published(:limit => 30)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
@@ -703,6 +711,7 @@ end
 
 get '/comments/feed' do
   @title = "Recent Comments"
+  @author = Weblog.author
   @comments = Comment.ham(:limit => 25)
   content_type :atom, :charset => 'utf-8'
   builder :comment_feed, :layout => :none
@@ -712,6 +721,7 @@ end
 
 get '/comments/' do
   @title = 'Recent Discussion'
+  @author = Weblog.author
   @comments = Comment.ham(:limit => 50)
   haml :comments
 end

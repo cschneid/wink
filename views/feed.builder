@@ -1,11 +1,11 @@
 xml.instruct!
 xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
-  xml.title   @title || "Ryan Tomayko"
+  xml.title   @title || @author
   xml.link    "rel" => "self", "href" => request.url
   xml.link    "rel" => "alternate", "href" => request.url.sub(/feed$/, '')
   xml.id      request.url
   xml.updated @entries.first.updated_at.iso8601 if @entries.any?
-  xml.author  { xml.name "Ryan Tomayko" }
+  xml.author  { xml.name @author }
   @entries.each do |@entry|
     xml.entry do
       xml.title   @entry.title

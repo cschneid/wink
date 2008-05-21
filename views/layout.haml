@@ -16,31 +16,17 @@
     = script 'tomayko'
     = script 'admin' if admin?
 
-    <link rel="openid.server" href="http://www.myopenid.com/server">
-    <link rel="openid.delegate" href="http://rtomayko.myopenid.com/">
     <link rel="icon" href="/favicon.png" type="image/png">
 
   %body{ :id => @page_id }
     #container
       ~ yield
       #footer
-        %form{ :action => "http://google.com/search" }
-          %div
-            <input type='hidden' name='as_sitesearch' value='tomayko.com'>
-            <input type='hidden' name='safe' value='off'>
-            <input type='hidden' name='num' value='25'>
-            Search:
-            <input type='text' name='as_q'>
         %p.rights
           = "Copyright &copy; 2003-#{Date.today.year} by"
-          %a{ :href => Weblog.url }Ryan Tomayko
+          %a{ :href => Weblog.url }= @author
           (
           %a{:href=>"http://creativecommons.org/licenses/by-sa/2.5/", :rel => "license"}license information
           )
-
-    - # Google Analytics Tracking Bug
-    - if !admin? && Sinatra.application.options.env == :production
-      <script type='text/javascript' src='http://www.google-analytics.com/ga.js' type='text/javascript'></script>
-      <script type='text/javascript'>var pageTracker = _gat._getTracker("UA-125803-2");pageTracker._initData();pageTracker._trackPageview();</script>
 
 -# vim: sts=2 sw=2 ts=2 expandtab
