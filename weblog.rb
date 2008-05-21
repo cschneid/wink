@@ -444,8 +444,10 @@ end
 
 
 # Setup Rack middleware
-use Rack::Lint if development?
-use Rack::Cacher
+if __FILE__ == $0
+    use Rack::Lint if development?
+    use Rack::Cacher
+end
 
 helpers do
   include Rack::Utils

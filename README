@@ -14,6 +14,15 @@ sources have been made available as-is for discussion purposes only. If you're
 mainly interested in running a blog, watch for an 0.1 release. If you're
 interested in hacking, stick around...
 
+Requirements
+------------
+Gems (need all their dependencies of course)
+    $ sudo gem install sinatra
+    $ sudo gem install BlueCloth
+    $ sudo gem install rubypants
+    $ sudo gem install html5
+    $ sudo gem install mysql_do
+
 Hacking
 -------
 
@@ -30,7 +39,7 @@ Next, change into your local wink clone and copy the `development.conf.example`
 to `development.conf`; edit to taste, making sure the database related settings
 are adjusted appropriately.
 
-Run the `db:init` task to create the initial table schema and start a new
+Run the `db:init` task to create the initial table schema and then start a new
 development server:
 
     $ rake db:init
