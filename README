@@ -2,24 +2,33 @@ Wink
 ====
 
 Wink is a minimalists weblog engine written in Ruby using Rack, Sinatra, and
-DataMapper.
+DataMapper. See the project repository on GitHub for more information:
 
-### Status
+http://github.com/rtomayko/wink/
+
+Status
+------
 
 A complete mess, at the moment. It will likely not run for you at all. The
 sources have been made available as-is for discussion purposes only. If you're
 mainly interested in running a blog, watch for an 0.1 release. If you're
 interested in hacking, stick around...
 
-### Getting Started
+Hacking
+-------
 
-First, create a new MySQL database:
+Project sources are stored in Git:
+
+    $ git clone git://github.com/rtomayko/wink.git
+
+Create a new MySQL database:
 
     $ mysql -u root
     mysql> CREATE DATABASE wink_development CHARACTER SET = utf8 ;
 
-Next, copy the `development.conf.example` to `development.conf` and edit to
-taste.  Make sure the database related settings are adjusted appropriately.
+Next, change into your local wink clone and copy the `development.conf.example`
+to `development.conf`; edit to taste, making sure the database related settings
+are adjusted appropriately.
 
 Run the `db:init` task to create the initial table schema and start a new
 development server:
@@ -28,3 +37,9 @@ development server:
     $ ruby weblog.rb
 
 The application should be available at: http://localhost:4567
+
+COPYING
+-------
+
+All sources included in this distribution are made available under the MIT
+license. See the file COPYING for more information.
