@@ -17,14 +17,21 @@ require 'rack_cacher'
 require 'akismet'
 require 'data_mapper'
 require 'ostruct'
+require 'yaml'
 
 configure do
 
   Weblog = OpenStruct.new(
     :url      => 'http://localhost:4567',
-    :name     => 'Some Weblog',
+
     :username => 'admin',
-    :password => nil
+    :password => nil,
+
+    :author => 'Fred Flinstone',
+    :title => 'My Weblog',
+    :writings => 'Writings',
+    :linkings => 'Linkings',
+    :url_regex => /^http:\/\/(mydomain\.com)/ 
   )
 
   def Weblog.configure
@@ -243,7 +250,7 @@ class Bookmark < Entry
     options.each { |key,val| delicious.send("#{key}=", val) }
     count = 0
     delicious.synchronize :since => last_updated_at do |source|
-      next if source[:href] =~ /^http:\/\/(naeblis\.cx|tomayko\.com)/
+      next if source[:href] =~ Weblog.url_regex
       next unless source[:shared]
       bookmark = find_or_create(:slug => source[:hash])
       bookmark.attributes = {
@@ -586,25 +593,25 @@ end
 
 get '/' do
   redirect '/', 301 if params[:page]
-  @title = "Ryan Tomayko"
+  @title = Weblog.title
   @entries = Entry.published(:limit => 50)
   haml :home
 end
 
 get '/writings/' do
-  @title = "Ryan Tomayko's Writings"
+  @title = Weblog.writings
   @entries = Article.published
   haml :home
 end
 
 get '/linkings/' do
-  @title = "Ryan Tomayko's Linkings"
+  @title = Weblog.linkings
   @entries = Bookmark.published(:limit => 100)
   haml :home
 end
 
 get '/circa/:year/' do
-  @title = "Ryan Tomayko circa #{params[:year].to_i}"
+  @title = "#{Weblog.author} circa #{params[:year].to_i}"
   @entries = Entry.published_circa(params[:year].to_i)
   haml :home
 end
@@ -681,14 +688,14 @@ end
 mime :atom, 'application/atom+xml'
 
 get '/feed' do
-  @title = "Ryan Tomayko's Writings"
+  @title = Weblog.writings
   @entries = Article.published(:limit => 10)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
 end
 
 get '/linkings/feed' do
-  @title = "Ryan Tomayko's Linkings"
+  @title = Weblog.linkings
   @entries = Bookmark.published(:limit => 30)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
