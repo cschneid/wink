@@ -4,7 +4,7 @@
   %head
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
     <meta http-equiv='X-UA-Compatible' content='YOUR MOM'>
-    %title= (h(@title) || 'Ryan Tomayko')
+    %title= (h(@title) || @author)
     = feed '/feed',          "Writings"
     = feed '/linkings/feed', "Linkings"
     = feed '/comments/feed', "Comments (Experimental)"

@@ -13,7 +13,7 @@ xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
       xml.id      @entry.tag_id
       xml.published @entry.created_at.iso8601
       xml.updated   @entry.created_at.iso8601
-      xml.author  { xml.name "Ryan Tomayko" }
+      xml.author  { xml.name @author }
       xml.summary "type" => "xhtml" do
         xml.div :xmlns => 'http://www.w3.org/1999/xhtml' do
           xml << content_filter(@entry.summary, :markdown)
