@@ -3,9 +3,28 @@
 
 Weblog::configure do |conf|
   conf.name = 'Your Weblog Name Here'
+
+  # Root URL
   conf.url = 'http://localhost:4567'
+
+  # User/Pass to log into permissioned areas
   conf.username = 'admin'
   conf.password = 'password'
+
+  # Your name here
+  conf.author = 'conf.author'
+
+  # Title of the blog
+  conf.title = 'Wink'
+
+  # Title of the page with writings
+  conf.writings = 'Writings'
+
+  # Title of the page with del.icio.us links
+  conf.linkings = 'Linkings'
+
+  # Regex that matches your domain name
+  conf.url_regex = /^http:\/\/(localhost)/ 
 end
 
 # Database Configuration
