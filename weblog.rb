@@ -26,12 +26,12 @@ configure do
 
     :username => 'admin',
     :password => nil,
-
     :author => 'Fred Flinstone',
     :title => 'My Weblog',
     :writings => 'Writings',
     :linkings => 'Linkings',
-    :url_regex => /^http:\/\/(mydomain\.com)/ 
+    :url_regex => /^http:\/\/(mydomain\.com)/,
+    :akismet => ''
   )
 
   def Weblog.configure
@@ -431,7 +431,7 @@ private
 
   # Wipe out the akismet singleton every 10 minutes due to suspected leaks.
   def self.akismet
-    @akismet = Akismet::new('d4d4c1ed9a0e', Weblog.url) if @akismet.nil? || (akismet_age > 600)
+    @akismet = Akismet::new(Weblog.akismet, Weblog.url) if @akismet.nil? || (akismet_age > 600)
     @last_akismet_access = Time.now
     @akismet
   end
