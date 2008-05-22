@@ -603,6 +603,7 @@ end
 
 get '/writings/' do
   @title = Weblog.writings
+  @author = Weblog.author
   @entries = Article.published
   haml :home
 end
