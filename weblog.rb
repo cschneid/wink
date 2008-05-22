@@ -518,7 +518,7 @@ helpers do
   end
 
   def css(href, media='all')
-    href = "/stylesheets/#{href}.css" unless href =~ /\.css$/
+    href = "/css/#{href}.css" unless href =~ /\.css$/
     tag :link, nil,
       :rel => 'stylesheet',
       :type => 'text/css',
