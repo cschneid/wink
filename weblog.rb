@@ -30,6 +30,7 @@ configure do
     :title => 'My Weblog',
     :writings => 'Writings',
     :linkings => 'Linkings',
+    :begin_date => 2008,
     :url_regex => /^http:\/\/(mydomain\.com)/,
     :akismet => ''
   )
@@ -593,6 +594,7 @@ end
 
 before do
     @author = Weblog.author
+    @begin_date = Weblog.begin_date
 end
 
 # Resources =================================================================

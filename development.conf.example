@@ -23,6 +23,9 @@ Weblog::configure do |conf|
   # Title of the page with del.icio.us links
   conf.linkings = 'Linkings'
 
+  # Start date for archives + copyright notice
+  conf.begin_date = 2008
+
   # Regex that matches your domain name
   conf.url_regex = /^http:\/\/(localhost)/ 
 end
