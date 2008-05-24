@@ -13,6 +13,13 @@ task :test do
   sh "testrb test/*_test.rb"
 end
 
+desc 'Start a development server'
+task :start do
+  command = "ruby wink -e #{wink_environment}"
+  STDERR.puts(command) if verbose
+  exec(command)
+end
+
 namespace :db do
 
   desc 'Create all database tables'
