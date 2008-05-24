@@ -5,8 +5,6 @@ require 'rubypants'
 require 'html5/html5parser'
 require 'html5/sanitizer'
 
-require 'rack_cacher'
-
 helpers do
   include Rack::Utils
 
@@ -235,8 +233,6 @@ post '/drafts/' do
   @entry.publish = params[:publish] if params[:publish]
   @entry.attributes = params.to_hash
   @entry.save
-  purge_cache "**/index.html", "**/feed.atom", "writings/#{@entry.slug}.*",
-    "topics/*"
   redirect entry_url(@entry)
 end
 
@@ -292,7 +288,6 @@ delete '/comments/:id' do
   require_administrative_privileges
   comment = Comment[params[:id].to_i]
   raise Sinatra::NotFound if comment.nil?
-  purge_cache "writings/#{comment.entry.slug}.*", "/comments/*"
   comment.destroy!
   ''
 end
@@ -305,7 +300,6 @@ put '/comments/:id' do
   comment.body = request.body.read
   comment.save
   status 204
-  purge_cache "writings/#{comment.entry.slug}.*", "comments/*"
   ''
 end
 
@@ -332,7 +326,6 @@ post '/writings/:slug/comment' do
     status 403
     haml :rickroll
   else
-    purge_cache "writings/#{entry.slug}.*", "comments/*"
     redirect entry_url(entry) + "#comment-#{comment.id}"
   end
 end
