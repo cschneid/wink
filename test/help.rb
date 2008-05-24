@@ -1,7 +1,6 @@
 # Wink test helper file. Most test files require this file before
 # anything else.
 
-
 # if this is the initial run, setup the load path:
 root_dir = File.
   expand_path("#{File.dirname(__FILE__)}/..").
@@ -19,7 +18,6 @@ require 'sinatra/test/spec'
 set_option :env, :test
 
 require 'wink'
-
 
 class Test::Unit::TestCase
 
@@ -41,4 +39,11 @@ class Test::Unit::TestCase
     end
   end
 
+end
+
+
+class Object
+  def truthful?
+    !!self
+  end
 end
