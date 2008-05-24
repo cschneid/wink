@@ -28,6 +28,9 @@ Weblog::configure do |conf|
 
   # Regex that matches your domain name
   conf.url_regex = /^http:\/\/(localhost)/ 
+
+  # IO stream where log messages should be written (default: STDERR)
+  conf.log_stream = STDERR
 end
 
 # Database Configuration

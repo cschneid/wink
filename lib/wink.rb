@@ -40,16 +40,19 @@ end
 
 require 'ostruct'
 Weblog = OpenStruct.new(
-  :url      => 'http://localhost:4567',
-  :username => 'admin',
-  :password => nil,
-  :author => 'Fred Flinstone',
-  :title => 'My Weblog',
-  :writings => 'Writings',
-  :linkings => 'Linkings',
-  :begin_date => 2008,
-  :url_regex => /^http:\/\/(mydomain\.com)/,
-  :akismet => ''
+  :url          => 'http://localhost:4567',
+  :author       => 'Fred Flinstone',
+  :title        => 'My Weblog',
+  :writings     => 'Writings',
+  :linkings     => 'Linkings',
+  :begin_date   => 2008,
+  :url_regex    => /^http:\/\/(mydomain\.com)/,
+
+  :username     => 'admin',
+  :password     => nil,
+  :akismet      => '',
+
+  :log_stream   => STDERR
 )
 
 def Weblog.configure
@@ -68,7 +71,7 @@ class DataMapper::Database
   end
 
   def create_logger
-    logger = Logger.new(STDERR)
+    logger = Logger.new(Weblog.log_stream)
     logger.level = Logger::DEBUG if development?
     logger.datetime_format = ''
     logger
