@@ -38,7 +38,7 @@ Project sources are stored in Git:
 Create a new MySQL database:
 
     $ mysql -u root
-    mysql> CREATE DATABASE wink_development CHARACTER SET = utf8 ;
+    mysql> CREATE DATABASE wink_development CHARACTER SET = utf8;
 
 Next, change into your local wink clone and copy the `development.conf.example`
 to `development.conf`; edit to taste, making sure the database related settings
@@ -51,6 +51,19 @@ development server:
     $ ruby wink
 
 The application should be available at: http://localhost:4567
+
+Testing
+-------
+
+Unit and functional tests are kept under the test directory. Before running
+tests, you will need to create a separate database:
+
+    $ mysql -u root
+    mysql> CREATE DATABASE wink_test CHARACTER SET = utf8;
+
+Once the database has been created, use rake to run the test suite:
+
+    $ rake test
 
 COPYING
 -------

@@ -1,14 +1,17 @@
 task :default => :test
 
+task :environment do
+  $:.unshift 'sinatra/lib' if File.exist?('sinatra')
+  $:.unshift 'lib'
+  require 'sinatra'
+  set_option :env, wink_environment
+  require 'wink'
+end
+
 desc 'Run tests'
 task :test do
-  ruby 'test.rb'
+  sh "testrb test/*_test.rb"
 end
-
-task :environment do
-  require 'weblog'
-end
-
 
 namespace :db do
 
@@ -22,4 +25,15 @@ namespace :db do
     Database.drop!
   end
 
+end
+
+
+def wink_environment
+  if ENV['WINK_ENV']
+    ENV['WINK_ENV'].to_sym
+  elsif defined?(Sinatra)
+    Sinatra.application.options.env
+  else
+    :development
+  end
 end
