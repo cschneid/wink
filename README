@@ -11,17 +11,22 @@ Status
 
 A complete mess, at the moment. It will likely not run for you at all. The
 sources have been made available as-is for discussion purposes only. If you're
-mainly interested in running a blog, watch for an 0.1 release. If you're
+mainly interested in running a blog, watch for a 1.0 release. If you're
 interested in hacking, stick around...
 
 Requirements
 ------------
-Gems (need all their dependencies of course)
-    $ sudo gem install sinatra
-    $ sudo gem install BlueCloth
-    $ sudo gem install rubypants
-    $ sudo gem install html5
-    $ sudo gem install mysql_do
+
+Gems (need all their dependencies of course):
+
+    $ sudo gem install datamapper --version=0.2.5
+    $ sudo gem install do_mysql
+    $ sudo gem install sinatra BlueCloth rubypants html5
+
+We are currently developing on MySQL only. Other databases are theoretically
+easy to support but we're limiting to one for now to speed initial development.
+
+Wink is currently being developed on MacOS X and FreeBSD.
 
 Hacking
 -------

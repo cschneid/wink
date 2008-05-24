@@ -39,10 +39,6 @@ DataMapper::Database.setup \
   :password   => '',
   :database   => 'wink_development'
 
-
-# Akismet Configuration
-
-
 # Uncomment the following to enable del.icio.us bookmark synchronization
 Bookmark.configure do |del|
   # del.user = 'YOUR DELICIOUS USERNAME'
