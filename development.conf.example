@@ -32,7 +32,7 @@ end
 
 # Database Configuration
 
-DataMapper::Database.setup \
+DataMapper::Database.configure \
   :adapter    => 'mysql',
   :host       => 'localhost',
   :username   => 'root',
