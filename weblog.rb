@@ -626,8 +626,7 @@ end
 
 get '/topics/:tag' do
   @title = "Regarding: '#{h(params[:tag].to_s.upcase)}'"
-  @entries = Entry.tagged(params[:tag])
-  @entries.reject! { |e| e.draft? }
+  @entries = Entry.tagged(params[:tag]).to_a.reject { |e| e.draft? }
   @entries.sort! do |b,a|
     if a.is_a?(Bookmark) && !b.is_a?(Bookmark)
       -1

@@ -22,7 +22,7 @@
       %p~ textarea(:body, @entry.body, :rows => 15)
       %p
         <label for='tags'>Tags</label><br>
-        = textbox :tag_names, @entry.tags.join(' ')
+        = textbox :tag_names, @entry.tags.to_a.join(' ')
       %p.buttons
         -unless @entry.published?
           <input type='submit' value='Save Draft'>
