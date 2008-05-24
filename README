@@ -48,7 +48,7 @@ Run the `db:init` task to create the initial table schema and then start a new
 development server:
 
     $ rake db:init
-    $ ruby weblog.rb
+    $ ruby wink
 
 The application should be available at: http://localhost:4567
 

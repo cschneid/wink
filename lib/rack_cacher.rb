@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'time'
 require 'rack'
+require 'sinatra'
 
 helpers do
 

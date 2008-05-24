@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+# if this is the initial run, setup the load path and grab a mutex
+if ! defined?(Sinatra)
+  root_dir = File.dirname(__FILE__)
+  $:.unshift "#{root_dir}/sinatra/lib" if File.directory?("#{root_dir}/sinatra")
+  $:.unshift "#{root_dir}/lib"
+end
+
+require 'rubygems'
+require 'sinatra'
+require 'wink'
+
+# Reloading =================================================================
+
+if development?
+
+  if ! reloading?
+
+    # this is the initial load of this file. set our UNLOADING constant
+    # to an array of names to remove before each reload.
+    UNLOAD = %w[Weblog Entry Article Bookmark Comment Tag EntryTags Database]
+
+  else
+
+    # remove all constants that we redefine in wink.rb
+    UNLOAD.each do |const_name|
+      begin
+        klass = Object.const_get(const_name)
+        klass.destroy! if klass.respond_to?(:destroy!)
+        Object.send :remove_const, const_name
+      rescue => boom
+        STDERR.puts "error unloading constant: #{const_name}"
+      end
+    end
+
+    # We also remove DataMapper's schema cache and subclass tracking since it keeps
+    # references to the class objects we've removed above. This ensures that old
+    # class objects can be GC'd.
+    DataMapper::Database[:default].adapter.instance_variable_set(:@schema, nil)
+    DataMapper::Persistence.subclasses.clear
+
+    # reload the actual wink sources.
+    load 'wink.rb'
+
+  end
+
+end
+
+# tell sinatra to run a server
+set_option :run, true if $0 == __FILE__
