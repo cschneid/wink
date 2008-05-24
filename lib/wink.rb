@@ -82,13 +82,13 @@ class DataMapper::Database
   end
 
   def self.create!(options={})
-    [ Entry, Comment, Tag, EntryTags ].each do |model|
+    [ Entry, Comment, Tag, Tagging ].each do |model|
       model.table.create! options[:force]
     end
   end
 
   def self.drop!
-    [ Entry, Comment, Tag, EntryTags ].each do |model|
+    [ Entry, Comment, Tag, Tagging ].each do |model|
       model.table.drop!
     end
   end

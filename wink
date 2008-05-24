@@ -20,7 +20,7 @@ if development?
 
     # this is the initial load of this file. set our UNLOADING constant
     # to an array of names to remove before each reload.
-    UNLOAD = %w[Weblog Entry Article Bookmark Comment Tag EntryTags Database]
+    UNLOAD = %w[Weblog Entry Article Bookmark Comment Tag Tagging Database]
 
   else
 

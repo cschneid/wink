@@ -25,7 +25,8 @@ class Entry
     :spam.not => true,
     :order => 'created_at ASC'
 
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags,
+    :join_table => 'taggings'
 
   def stem
     "writings/#{slug}"
@@ -184,17 +185,17 @@ class Tag
 
   has_and_belongs_to_many :entries,
     :conditions => { :published => true },
-    :order => "(entries.type = 'Bookmark') ASC, entries.created_at DESC"
+    :order => "(entries.type = 'Bookmark') ASC, entries.created_at DESC",
+    :join_table => 'taggings'
 
   def to_s
     name
   end
 end
 
-class EntryTags
+class Tagging
   include DataMapper::Persistence
 
-  set_table_name 'entries_tags'
   belongs_to :entry
   belongs_to :tag
   index [ :entry_id ]
