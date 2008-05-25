@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: del.ici.ous synchronization does full updates when it shouldn't
+desc: |-
+  There's some kind of weird timestamp comparison problem that's causing
+  bookmarks to be synchronized even when no new bookmarks are present.
+type: :bugfix
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 20:07:29.756824 Z
+references: []
+
+id: e1bb6d38f99ac9adb439a7a01d404437654315f3
+log_events: 
+- - 2008-05-25 20:07:31.157017 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Website
+desc: |-
+  Need to get a website up somewhere with some basic info for now. I'd also like to
+  setup a system for publishing the Ditz bug status.
+type: :feature
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 20:24:58.505371 Z
+references: []
+
+id: 50093958d3a76ba880d6115c451c2b008321edda
+log_events: 
+- - 2008-05-25 20:24:59.481180 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

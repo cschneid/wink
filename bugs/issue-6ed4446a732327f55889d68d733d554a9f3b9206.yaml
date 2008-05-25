@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Replace "Weblog" OpenStruct with "Wink" module
+desc: The whole Weblog OpenStruct thing feels extremely hacky.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 18:56:40.748410 Z
+references: []
+
+id: 6ed4446a732327f55889d68d733d554a9f3b9206
+log_events: 
+- - 2008-05-25 18:56:41.940283 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

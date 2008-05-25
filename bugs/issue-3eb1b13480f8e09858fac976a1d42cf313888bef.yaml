@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Gemify
+desc: It would be interesting to see if we could package the entire webapp as a gem.
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:48:53.004617 Z
+references: []
+
+id: 3eb1b13480f8e09858fac976a1d42cf313888bef
+log_events: 
+- - 2008-05-25 19:48:54.100583 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

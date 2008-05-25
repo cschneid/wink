@@ -1,0 +1,41 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Authentication Not Remembered
+desc: |-
+  Many of the resources exposed by Wink have a public representation and an
+  authenticated representation. The authenticated representation is used when the
+  browser sends a valid Authorization header. However, in order to trigger the
+  username/password prompt, an "Authorization Required" response must be sent.
+  
+  There's a resource: "/identify", that prompts for user information and redirects
+  to another page (based on the "dest" parameter). Browsers do send authorization
+  headers to the page redirected to but subsequent pages are not authenticated.
+  
+  The result is that you have to visit the "/identify" resource before each
+  resource that requires authorization -- a real PITA.
+  
+  (I've only tested this with Firefox 2.x/3.x but I assume all browsers function
+  similarly.)
+  
+  I'm not sure there's any really great fix for this issue. I was hoping to experiment
+  with sending WWW-Authenticate headers with the public/unauthenticated 200 responses
+  to see if that would coax the browser into providing auth information on subsequent
+  requests.
+type: :bugfix
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:45:14.925550 Z
+references: []
+
+id: c03fb48079b3066d95dbde16b7d9af2b514e1363
+log_events: 
+- - 2008-05-25 19:45:16.837460 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:57:20.947197 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.3 from unassigned
+  - ""

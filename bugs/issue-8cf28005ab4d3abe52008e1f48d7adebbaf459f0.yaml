@@ -1,0 +1,31 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Three phase boot: config, models, web"
+desc: |-
+  The current startup process goes roughly as follows:
+  
+    1. Initialize objects required for configuration.
+    2. Load external config file.
+    3. Require DataMapper models
+    4. Require Sinatra/web event definitions
+  
+  Make it possible to enter any stage of this process by separating
+  each step into separate files. For instance, requiring 'wink/config'
+  should make it possible to configure the database and other things only.
+  After configuration, you should be able to require only 'wink/models' if
+  you just want to interact with the database. Requiring 'wink/web' would
+  load the actual Sinatra event handlers.
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 18:55:28.297911 Z
+references: []
+
+id: 8cf28005ab4d3abe52008e1f48d7adebbaf459f0
+log_events: 
+- - 2008-05-25 18:55:29.193924 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

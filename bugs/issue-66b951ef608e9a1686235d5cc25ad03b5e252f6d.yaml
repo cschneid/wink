@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Basic testing framework
+desc: We need to get a system for adding tests in place before doing anything else.
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-25 18:51:01.121260 Z
+references: []
+
+id: 66b951ef608e9a1686235d5cc25ad03b5e252f6d
+log_events: 
+- - 2008-05-25 18:51:02.433341 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:01:32.269703 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

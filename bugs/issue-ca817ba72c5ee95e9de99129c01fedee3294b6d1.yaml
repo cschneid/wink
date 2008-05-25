@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Comment/Spam Review
+desc: |-
+  There's currently no way to view or modify comments marked as spam by Akismet.
+  The comment viewing UI displays only Ham comments.
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:52:59.941043 Z
+references: []
+
+id: ca817ba72c5ee95e9de99129c01fedee3294b6d1
+log_events: 
+- - 2008-05-25 19:53:01.084562 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

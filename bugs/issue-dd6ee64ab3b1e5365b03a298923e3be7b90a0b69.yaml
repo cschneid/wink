@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: LICENSE and README
+desc: Very important :)
+type: :feature
+component: wink
+release: "0.1"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-23 18:36:48.881252 Z
+references: []
+
+id: dd6ee64ab3b1e5365b03a298923e3be7b90a0b69
+log_events: 
+- - 2008-05-23 18:37:01.161524 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-23 18:37:53.283246 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - |-
+    README should be good enough to get started w/ development.
+    MIT licensed.

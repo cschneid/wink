@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Anonymize CSS and JS sources
+desc: |-
+  We need to rename tomayko.js and naeblis.css to wink.js and wink.css,
+  respectively. We'll also want to scrub these for references to
+  tomayko.com.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:47:30.890120 Z
+references: []
+
+id: f4905003144b36a9ab88dfccda00eae5f7d4ebe2
+log_events: 
+- - 2008-05-25 19:47:35.034007 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

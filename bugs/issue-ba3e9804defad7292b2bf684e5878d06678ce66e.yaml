@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Comment feed uses hardcoded tag: identifier"
+desc: |-
+  Need to replace the id generation in comment_feed.builder with some other method
+  of generating a unique id.
+type: :bugfix
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-26 02:25:01.230397 Z
+references: []
+
+id: ba3e9804defad7292b2bf684e5878d06678ce66e
+log_events: 
+- - 2008-05-26 02:25:02.670286 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

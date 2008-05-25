@@ -1,0 +1,26 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Extract sources from http://tomayko.com
+desc: Just grab what you can and get something on GitHub
+type: :feature
+component: wink
+release: "0.1"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-22 19:23:20.590513 Z
+references: []
+
+id: 9c40f50cbd328ce33935b46e5876c565f0920b36
+log_events: 
+- - 2008-05-22 19:23:22.590567 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-22 19:23:38.671101 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.1 from unassigned
+  - ""
+- - 2008-05-23 19:23:46.247370 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

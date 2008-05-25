@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Akismet spam detection runs even when no Akismet key is specified
+desc: We should disable spam detection when no key is provided.
+type: :bugfix
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-26 06:36:22.101109 Z
+references: []
+
+id: d9419f163c46dd0c37b3b9cf378f156f8f2745be
+log_events: 
+- - 2008-05-26 06:36:23.877087 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

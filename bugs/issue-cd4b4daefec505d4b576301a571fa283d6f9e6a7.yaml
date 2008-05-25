@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Related Entries
+desc: |-
+  I have code laying around somewhere that finds related entries based
+  on tags. Need to add that back in at some point.
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 20:08:27.262790 Z
+references: []
+
+id: cd4b4daefec505d4b576301a571fa283d6f9e6a7
+log_events: 
+- - 2008-05-25 20:08:28.358782 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

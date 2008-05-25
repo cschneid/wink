@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Better config file organization
+desc: |-
+  At a minimum, the environment config files should move into a config directory.
+  We may also want to consider using DataMapper's built in config file detection
+  and splitting things out into a couple of files.
+type: :task
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 20:13:25.144424 Z
+references: []
+
+id: bbf0831730912095da4831b499b486a019663c5e
+log_events: 
+- - 2008-05-25 20:13:26.040317 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

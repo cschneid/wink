@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Remove rack_cacher
+desc: This will be re-added at some point in the future but quite differently.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-25 18:58:10.295259 Z
+references: []
+
+id: 07ee06d7724d94fdbcb740e327f7740294d2aef8
+log_events: 
+- - 2008-05-25 18:58:11.991113 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:01:42.485955 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

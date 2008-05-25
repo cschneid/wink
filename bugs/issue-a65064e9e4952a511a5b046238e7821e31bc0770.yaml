@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add sinatra as a submodule
+desc: |-
+  We currently need to run off Sinatra's master and this will probably
+  be the case moving forward for awhile. We should add a git submodule
+  and maybe a rake task to make it easy to check it out.
+type: :task
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 20:22:59.418760 Z
+references: []
+
+id: a65064e9e4952a511a5b046238e7821e31bc0770
+log_events: 
+- - 2008-05-25 20:23:00.603852 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

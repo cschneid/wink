@@ -1,0 +1,30 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: DataMapper 0.9 compatibility
+desc: |-
+  We're currently running on DataMapper 0.2.5, which is quite old. We should
+  get a branch going with DM edge/0.9 changes to see what we're in for.
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 15:40:17.335905 Z
+references: []
+
+id: 49752db05a4922a62ec04898b3f75b0b0300bac1
+log_events: 
+- - 2008-05-25 15:40:20.783484 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:00:04.754834 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - unassigned from release 0.2
+  - ""
+- - 2008-05-25 19:03:08.715414 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - commented
+  - |-
+    I read somewhere that the DM guys are planning on having an official 0.9 release
+    no later than RailsConf '08.

@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Functional tests for all Sinatra events
+desc: ""
+type: :feature
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:55:58.040041 Z
+references: []
+
+id: f6897698f3ab882ec4029552eeed097d7958fd38
+log_events: 
+- - 2008-05-25 19:55:59.007875 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:57:03.426612 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.3 from unassigned
+  - ""

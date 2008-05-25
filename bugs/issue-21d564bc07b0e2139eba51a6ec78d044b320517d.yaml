@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Support for reloading all wink sources in development
+desc: Code reloading is horribly broken at the moment, making development a pain.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-25 18:59:28.617781 Z
+references: []
+
+id: 21d564bc07b0e2139eba51a6ec78d044b320517d
+log_events: 
+- - 2008-05-25 18:59:30.489806 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:01:55.558508 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

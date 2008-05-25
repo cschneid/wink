@@ -1,0 +1,21 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Use helpers for accessing author (and other Weblog attributes) instead of ivars
+desc: |-
+  We're currently setting @author and @begin_date in a before block. It would be
+  much easier to manage these types of variables if we exposed them via helper
+  methods instead.
+type: :task
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:55:05.488821 Z
+references: []
+
+id: 929a2a0bcf96f00e9695fbb4f9a6983a072ec1d9
+log_events: 
+- - 2008-05-25 19:55:06.640706 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Unit tests for all models
+desc: Let's get these spec'd out ASAP.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 18:57:22.053672 Z
+references: []
+
+id: a6c63b352cb62cf08a92c511f42dc5f17ee1dedc
+log_events: 
+- - 2008-05-25 18:57:22.973602 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

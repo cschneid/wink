@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Custom Text Filters
+desc: |-
+  Right now we're Markdown through-out but it would be nice if this could be
+  customized to support additional formats.
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:59:40.509798 Z
+references: []
+
+id: 8754f39ea202bafc8c141248520d59399fff6c20
+log_events: 
+- - 2008-05-25 19:59:41.293643 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Sinatra reloading breaks DM models
+desc: ""
+type: :bugfix
+component: wink
+release: "0.1"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-23 18:38:40.596973 Z
+references: []
+
+id: af7340d4a7c87548a5ea1f5f7bf8a63d3a839b6e
+log_events: 
+- - 2008-05-23 18:38:42.244816 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-23 18:40:02.511423 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - "Temporary workaround by cschneid: remove references to validates_presence_of"

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Move Akismet and Delicious helper libs into Wink module
+desc: These are just kind of hanging off the top level and could be cleaned up quite a bit.
+type: :task
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-25 19:50:35.487919 Z
+references: []
+
+id: f75c9a9f9eaa152254f065657916a98870c71229
+log_events: 
+- - 2008-05-25 19:50:36.343846 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

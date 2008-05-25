@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Make log output configurable
+desc: ""
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-25 19:03:41.682199 Z
+references: []
+
+id: d435cb313c2349d6b6045be87fd310a7d6751537
+log_events: 
+- - 2008-05-25 19:03:50.514170 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:04:23.654120 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - |-
+    It's now possible to set the log_stream config option to specify where log
+    output should be written.

@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Remove hard-coded Akismet key
+desc: ""
+type: :bugfix
+component: wink
+release: "0.1"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-23 18:41:20.818132 Z
+references: []
+
+id: 0705bc6d002892a0894e0996f3bd3af4c62a41fb
+log_events: 
+- - 2008-05-23 18:41:22.722007 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-23 18:41:40.090869 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

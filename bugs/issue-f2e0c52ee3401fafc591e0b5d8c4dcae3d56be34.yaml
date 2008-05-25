@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Rename EntryTags model to Tagging
+desc: I saw this in Mephisto and thought the name was easier on the eyes :)
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-25 19:01:06.844963 Z
+references: []
+
+id: f2e0c52ee3401fafc591e0b5d8c4dcae3d56be34
+log_events: 
+- - 2008-05-25 19:01:07.844827 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-25 19:01:16.741144 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""
