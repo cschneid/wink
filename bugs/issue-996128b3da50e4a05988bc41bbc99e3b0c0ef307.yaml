@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Use Sinatra's options for configuration
+desc: |-
+  By using Sinatra's options, instead of our own OpenStruct, we get to use all
+  of the nice helpers like the top-level "set".
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-26 09:52:32.633896 Z
+references: []
+
+id: 996128b3da50e4a05988bc41bbc99e3b0c0ef307
+log_events: 
+- - 2008-05-26 09:52:33.745856 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-26 09:52:59.714527 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

@@ -3,12 +3,12 @@ require File.dirname(__FILE__) + "/help"
 context 'a basic wink environment' do
 
   specify 'top level objects should be defined' do
-    Object.should.const_defined 'Weblog'
     Object.should.const_defined 'Entry'
     Object.should.const_defined 'Bookmark'
+    Object.should.const_defined 'Article'
   end
 
-  specify 'environment detection should be present' do
+  specify 'top level environment detection should be present' do
     Object.private_methods.should.include 'environment'
     environment.should.equal :test
   end
@@ -21,11 +21,11 @@ context 'a basic wink environment' do
 
   specify 'reloading in test environment should be disabled' do
     Object.private_methods.should.include 'reloading?'
-    reloading?.should.not.be true
+    reloading?.should.not.be.truthful
   end
 
   specify 'automatic server running should be disabled' do
-    Sinatra.application.options.run.should.not.be true
+    Sinatra.application.options.run.should.not.be.truthful
   end
 
 end

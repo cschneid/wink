@@ -1,0 +1,41 @@
+# Wink Configuration
+
+
+# The site's root URL. Note: the trailing slash should be 
+# omitted when setting this option.
+set :url, 'http://localhost:4567'
+
+## The full name of the site's author.
+set :author, 'Anonymous Coward'
+
+## Administartive credentials used to log into permissioned areas
+set :username, 'admin'
+set :password, 'password'
+
+## The site's title. Defaults to the author's name if not set.
+#set :title, 'Anonymous Rants'
+
+## Title of the page with writings
+set :writings, 'Writings'
+
+## Title of the page with del.icio.us links
+set :linkings, 'Linkings'
+
+## Start date for archives + copyright notice
+set :begin_date, 2008
+
+## Where to write log messages (defaults to STDERR)
+# set :log_stream, File.open('development.log', 'ab')
+
+
+# Database Configuration
+
+Database.configure \
+  :adapter    => 'mysql',
+  :host       => 'localhost',
+  :username   => 'root',
+  :password   => '',
+  :database   => 'wink_development'
+
+
+# vim: ft=ruby

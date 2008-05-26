@@ -18,8 +18,8 @@ type: :feature
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 18:55:28.297911 Z
 references: []
 
@@ -28,4 +28,8 @@ log_events:
 - - 2008-05-25 18:55:29.193924 Z
   - Ryan Tomayko <r@tomayko.com>
   - created
+  - ""
+- - 2008-05-26 09:49:48.804379 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
   - ""

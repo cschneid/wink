@@ -5,6 +5,10 @@ require 'rubypants'
 require 'html5/html5parser'
 require 'html5/sanitizer'
 
+require 'wink'
+require 'wink/models'
+
+
 helpers do
   include Rack::Utils
 

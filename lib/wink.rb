@@ -1,107 +1,113 @@
-
-require 'time'
-class DateTime
-  def iso8601
-    to_time.iso8601
-  end
-end
-
-
 require 'sinatra'
+require 'wink/core_extensions'
 
-def environment
-  Sinatra.application.options.env.to_sym
-end
+# Tell Sinatra to not automatically start a server.
+set :run, false
 
-def reloading?
-  Sinatra.application.reloading?
-end
+unless reloading?
 
-def production?
-  environment == :production
-end
+  # The site's root URL. Note: the trailing slash should be 
+  # omitted when setting this option.
+  set :url, 'http://localhost:4567'
 
-def development?
-  environment == :development
-end
+  # A regular expression that matches URLs to your site's content. Used
+  # to detect bookmarks and external content referencing the current site.
+  set :url_regex, /http\:/
 
-# don't run server by default when loaded as a library.
-set_option :run, false
+  # The full name of the site's author.
+  set :author, 'Anonymous Coward'
 
+  # The administrator username. You will be prompted to authenticate with
+  # this username before modifying entries and comments or providing other
+  # administrative activities. Default: "admin".
+  set :username, 'admin'
 
-module Rack
-  class Request
-    def remote_ip
-      @env['HTTP_X_FORWARDED_FOR'] || @env['HTTP_CLIENT_IP'] || @env['REMOTE_ADDR']
-    end
-  end
-end
+  # The administrator password (see #username). The password is +nil+ by
+  # default, disabling administrative access; you must set the password
+  # explicitly.
+  set :password, nil
 
+  # The site's Akismet key, if spam detection should be performed.
+  set :akismet, nil
 
-require 'ostruct'
-Weblog = OpenStruct.new(
-  :url          => 'http://localhost:4567',
-  :author       => 'Fred Flinstone',
-  :title        => 'My Weblog',
-  :writings     => 'Writings',
-  :linkings     => 'Linkings',
-  :begin_date   => 2008,
-  :url_regex    => /^http:\/\/(mydomain\.com)/,
+  # Where to write log messages.
+  set :log_stream, STDERR
 
-  :username     => 'admin',
-  :password     => nil,
-  :akismet      => '',
+  # The site's title. Defaults to the author's name.
+  set :title, nil
 
-  :log_stream   => STDERR
-)
+  # Title of area that lists Article entries.
+  set :writings, 'Writings'
 
-def Weblog.configure
-  yield self
+  # Title of area that lists Bookmark entries.
+  set :linkings, 'Linkings'
+
+  # Start date for archives + copyright notice.
+  set :begin_date, Date.today.year
+
 end
 
 
-require 'data_mapper'
-class DataMapper::Database
+module Wink
+  extend self
 
-  class Logger < ::Logger
-    def format_message(sev, date, message, progname)
-      message = progname if message.blank?
-      "#{message}\n"
-    end
+  # Application level options.
+  def options
+    Sinatra.application.options
   end
 
-  def create_logger
-    logger = Logger.new(Weblog.log_stream)
-    logger.level = Logger::DEBUG if development?
-    logger.datetime_format = ''
-    logger
+  # Get an option value.
+  def [](option_name)
+    options.send(option_name)
   end
 
-  # Acts exactly like Database#setup but runs exactly once. Multiple calls
-  # to Database#setup result in multiple database connections being
-  # established.
-  def self.configure(options={})
-    setup(options) unless reloading?
+  # Set an option value.
+  def []=(option_name, value)
+    options.send("#{option_name}=", value)
   end
 
-  def self.create!(options={})
-    [ Entry, Comment, Tag, Tagging ].each do |model|
-      model.table.create! options[:force]
-    end
+  # Load configuration from the file specified and/or by executing the block. If
+  # both a file and block are given, the config file is loaded first and then
+  # the block is executed.
+  #
+  # Database configuration must be in place once the config file and block are
+  # processed.
+  def configure(file=nil)
+    Kernel::load(file) if file
+    yield options if block_given?
+    require 'wink/models'
+    self
   end
 
-  def self.drop!
-    [ Entry, Comment, Tag, Tagging ].each do |model|
-      model.table.drop!
-    end
+  # Load configuration from the file and/or block as specified in Wink#configure
+  # and setup Sinatra to start a server instance.
+  def run!(config_file=nil, &block)
+    configure(config_file, &block)
+    require 'wink/web'
+    Sinatra.application.options.run = true
+  end
+
+  # Rackup compatible constructor. Use in Rackup files as follows:
+  #
+  #   require 'wink'
+  #   run Wink do |config|
+  #     config.env = :production
+  #     config.url = 'http://example.com'
+  #   end
+  #
+  # If neither a config_file or a block is given, load the default
+  # config file: 'wink.conf'.
+  def new(config_file=nil, &block)
+    config_file ||= 'wink.conf' unless block_given?
+    configure(config_file, &block)
+    require 'wink/web'
+    Sinatra.application
   end
 
 end
 
 
-Database = DataMapper::Database
-
-class Entry
+class Entry #:nodoc:
 end
 
 class Bookmark < Entry
@@ -114,12 +120,14 @@ class Bookmark < Entry
   end
 end
 
-load "#{Dir.getwd}/#{environment}.conf"
-
-require 'wink/models'
-require 'wink/web'
-
-if reloading?
-  load 'wink/models.rb'
-  load 'wink/web.rb'
+# DEPRECATED: Weblog will be removed next-release-ish. Use +set+ or
+# Wink::options to access configuration variables.
+module Weblog
+  extend self
+  def configure(&block)
+    yield Wink.options
+  end
+  def method_missing(name, *args, &block)
+    Wink.options.__send__(name, *args, &block)
+  end
 end

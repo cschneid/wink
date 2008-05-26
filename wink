@@ -9,18 +9,20 @@ if ! defined?(Sinatra)
 end
 
 require 'rubygems'
-require 'sinatra'
 require 'wink'
+
+Wink.run! 'wink.conf' unless reloading?
+
 
 # Reloading =================================================================
 
 if development?
 
-  if ! reloading?
+  unless reloading?
 
     # this is the initial load of this file. set our UNLOADING constant
     # to an array of names to remove before each reload.
-    UNLOAD = %w[Weblog Entry Article Bookmark Comment Tag Tagging Database]
+    UNLOAD = %w[Entry Article Bookmark Comment Tag Tagging]
 
   else
 
@@ -41,12 +43,12 @@ if development?
     DataMapper::Database[:default].adapter.instance_variable_set(:@schema, nil)
     DataMapper::Persistence.subclasses.clear
 
-    # reload the actual wink sources.
+    # reload all wink sources.
     load 'wink.rb'
+    load 'wink.conf'
+    load 'wink/models.rb'
+    load 'wink/web.rb'
 
   end
 
 end
-
-# tell sinatra to run a server
-set_option :run, true if $0 == __FILE__

@@ -30,9 +30,11 @@ end
 task :environment do
   $:.unshift 'sinatra/lib' if File.exist?('sinatra')
   $:.unshift 'lib'
-  require 'sinatra'
-  set_option :env, wink_environment
+  $:.unshift '.'
   require 'wink'
+  Wink.configure 'wink.conf' do
+    set :env, wink_environment
+  end
 end
 
 

@@ -9,15 +9,25 @@ $:.unshift "#{root_dir}/sinatra/lib" if File.exist?("#{root_dir}/sinatra")
 $:.unshift "#{root_dir}/lib"
 $:.unshift "#{root_dir}/test"
 
-
-require 'test/unit'
-require 'sinatra'
+require 'rubygems'
+require 'wink'
 require 'sinatra/test/unit'
 require 'sinatra/test/spec'
 
-set_option :env, :test
+Wink.configure do
+  set :env, :test
+  set :url, 'http://test.local'
+  set :author, 'John Doe'
+  set :log_stream, File.open('test.log', 'wb')
 
-require 'wink'
+  Database.configure \
+    :adapter    => 'mysql',
+    :host       => 'localhost',
+    :username   => 'root',
+    :password   => '',
+    :database   => 'wink_test'
+end
+
 
 class Test::Unit::TestCase
 

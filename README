@@ -26,7 +26,8 @@ Gems (need all their dependencies of course):
 We are currently developing on MySQL only. Other databases are theoretically
 easy to support but we're limiting to one for now to speed initial development.
 
-Wink is currently being developed on MacOS X and FreeBSD.
+Wink is developed primarily under MacOS X and tested on FreeBSD and
+a variety of GNU/Linux distributions.
 
 Hacking
 -------
@@ -40,8 +41,8 @@ Create a new MySQL database:
     $ mysql -u root
     mysql> CREATE DATABASE wink_development CHARACTER SET = utf8;
 
-Next, change into your local wink clone and copy the `development.conf.example`
-to `development.conf`; edit to taste, making sure the database related settings
+Next, change into your local wink clone and copy the `wink.conf.example`
+to `wink.conf`; edit to taste, making sure the database related settings
 are adjusted appropriately.
 
 Run the `db:init` task to create the initial table schema and then start a new
