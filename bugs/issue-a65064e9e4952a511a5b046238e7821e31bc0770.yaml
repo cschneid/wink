@@ -8,8 +8,8 @@ type: :task
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 20:22:59.418760 Z
 references: []
 
@@ -19,3 +19,7 @@ log_events:
   - Ryan Tomayko <r@tomayko.com>
   - created
   - ""
+- - 2008-05-26 03:22:14.757678 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - tracking master branch of git://github.com/rtomayko/sinatra.git as submodule.
