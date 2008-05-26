@@ -1,5 +1,5 @@
 require 'net/http'
-require 'akismet'
+require 'wink/akismet'
 
 class Entry
   include DataMapper::Persistence
@@ -255,33 +255,6 @@ class Comment
       gsub(/^(\s*)(#\d+)/) { [$1, "\\", $2].join }
   end
 
-  def spam?
-    spam
-  end
-
-  def ham?
-    ! spam?
-  end
-
-  def check
-    @checked = true
-    @spam = check_comment
-  rescue ::Net::HTTPError => boom
-    logger.error "An error occured while connecting to Akismet: #{boom.to_s}"
-    @checked = false
-  end
-
-  def check!
-    check
-    save!
-  end
-
-  def spam!
-    @spam = true
-    submit_spam
-    save!
-  end
-
   def url
     if @url.to_s.strip.blank?
       nil
@@ -311,8 +284,55 @@ class Comment
     end
   end
 
+  # Has the current comment been marked as spam?
+  def spam?
+    spam
+  end
+
+  # Opposite of #spam? -- true when the comment has not been marked as
+  # spam.
+  def ham?
+    ! spam?
+  end
+
+  # Check the comment with Akismet. The spam attribute is updated to reflect
+  # whether the spam was detected or not.
+  def check
+    @checked = true
+    @spam = akismet(:check) || false
+  rescue ::Net::HTTPError => boom
+    logger.error "An error occured while connecting to Akismet: #{boom.to_s}"
+    @checked = false
+  end
+
+  # Check the comment with Akismet and immediately save the comment.
+  def check!
+    check
+    save!
+  end
+
+  # Mark this comment as spam and immediately save the comment. If Akismet is
+  # enabled, the comment is submitted as spam.
+  def spam!
+    @spam = true
+    akismet :spam!
+    save!
+  end
+
 private
 
+  # Should comments be checked with Akismet before saved?
+  def akismet?
+    Wink[:akismet] && production?
+  end
+
+  # Send an Akismet request with parameters from the receiver's model. Return
+  # nil when Akismet is not enabled.
+  def akismet(method, extra={})
+    akismet_connection.__send__(method, akismet_params(extra)) if akismet?
+  end
+
+  # Build a Hash of Akismet parameters based on the properties of the receiver.
   def akismet_params(others={})
     { :user_ip            => ip,
       :user_agent         => user_agent,
@@ -324,27 +344,9 @@ private
       :comment_content    => body }.merge(others)
   end
 
-  def check_comment(params=akismet_params)
-    if production?
-      self.class.akismet.check_comment(params)
-    else
-      false
-    end
-  end
-
-  def submit_spam(params=akismet_params)
-    self.class.akismet.submit_spam(params)
-  end
-
-  # Wipe out the akismet singleton every 10 minutes due to suspected leaks.
-  def self.akismet
-    @akismet = Akismet::new(Weblog.akismet, Weblog.url) if @akismet.nil? || (akismet_age > 600)
-    @last_akismet_access = Time.now
-    @akismet
-  end
-
-  def self.akismet_age
-    Time.now - @last_akismet_access
+  # The Wink::Akismet instance used for checking comments.
+  def akismet_connection
+    @akismet_connection ||= Akismet::new(Wink[:akismet], Wink[:url])
   end
 
 end
