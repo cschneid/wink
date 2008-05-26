@@ -51,6 +51,8 @@ end
 module Wink
   extend self
 
+  VERSION = '0.2'
+
   # Application level options.
   def options
     Sinatra.application.options
