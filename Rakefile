@@ -1,12 +1,6 @@
-task :default => :test
+require 'rake/clean'
 
-task :environment do
-  $:.unshift 'sinatra/lib' if File.exist?('sinatra')
-  $:.unshift 'lib'
-  require 'sinatra'
-  set_option :env, wink_environment
-  require 'wink'
-end
+task :default => :test
 
 desc 'Run tests'
 task :test do
@@ -19,6 +13,30 @@ task :start do
   STDERR.puts(command) if verbose
   exec(command)
 end
+
+
+# Environment Configuration ==================================================
+
+def wink_environment
+  if ENV['WINK_ENV']
+    ENV['WINK_ENV'].to_sym
+  elsif defined?(Sinatra)
+    Sinatra.application.options.env
+  else
+    :development
+  end
+end
+
+task :environment do
+  $:.unshift 'sinatra/lib' if File.exist?('sinatra')
+  $:.unshift 'lib'
+  require 'sinatra'
+  set_option :env, wink_environment
+  require 'wink'
+end
+
+
+# Database Related Tasks ====================================================
 
 namespace :db do
 
@@ -35,12 +53,43 @@ namespace :db do
 end
 
 
-def wink_environment
-  if ENV['WINK_ENV']
-    ENV['WINK_ENV'].to_sym
-  elsif defined?(Sinatra)
-    Sinatra.application.options.env
-  else
-    :development
+# Documentation Tasks ========================================================
+
+desc 'Generate documentation and website (doc/)'
+task 'doc' => [ 'doc:todo', 'doc:api' ]
+
+desc 'Generate Ditz HTML reports (doc/todo)'
+task 'doc:todo' => ['doc/todo/index.html']
+
+directory 'doc/todo'
+
+file 'doc/todo/index.html' => ['doc/todo'] + FileList['bugs/*'] do |f|
+  sh 'rm -rf doc/todo && ditz html doc/todo'
+end
+
+CLEAN.include 'doc/todo'
+
+desc 'Generate API documentation'
+task 'doc:api' => 'doc/api/index.html'
+
+file 'doc/api/index.html' => FileList['lib/**/*.rb','README'] do |f|
+  rb_files = f.prerequisites
+  sh((<<-end).gsub(/\s+/, ' '))
+    rdoc --charset utf8 \
+         --fmt html \
+         --inline-source \
+         --line-numbers \
+         --main Wink \
+         --op doc/api \
+         --title 'Wink API Documentation' \
+         #{rb_files.join(' ')}
   end
+end
+
+CLEAN.include 'doc/api'
+
+
+desc 'Publish docs to Rubyforge'
+task 'doc:publish' => [ 'doc' ] do |t|
+  sh 'scp -rp doc/* rubyforge.org:/var/www/gforge-projects/wink/'
 end
