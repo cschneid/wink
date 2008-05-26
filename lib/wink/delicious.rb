@@ -1,23 +1,28 @@
 require 'time'
 
-module Delicious
+module Wink
 
-  class Synchronization
+  # Implements del.icio.us bookmark synchronization.
+  class Delicious
 
     # The del.icio.us username.
-    attr_accessor :user
+    attr_reader :user
 
     # The del.icio.us password
-    attr_accessor :password
+    attr_reader :password
 
     # Path to file to use as a cache of all bookmarks. This is used primarily
     # for testing.
-    attr_accessor :cache_path
+    attr_accessor :cache
 
-    def initialize(options={})
-      @user = options[:user]
-      @password = options[:password]
-      @cache_path = options[:cache_path] || options[:cache]
+    # The User-Agent header sent with requests to del.icio.us.
+    attr_accessor :user_agent
+
+    def initialize(user, password, options={})
+      @user = user
+      @password = password
+      @cache = options[:cache]
+      @user_agent = options[:user_agent] || "Wink/#{Wink::VERSION}"
       @last_updated_at = nil
       yield self if block_given?
     end
@@ -27,18 +32,18 @@ module Delicious
     def open
       require 'rexml/document'
       xml =
-        if cache_path && File.exist?(cache_path)
-          File.read(cache_path)
+        if cache && File.exist?(cache)
+          File.read(cache)
         else
-          request(:all)
+          request :all
         end
-      File.open(cache_path, 'wb') { |io| io.write(xml) } if cache_path
+      File.open(cache, 'wb') { |io| io.write(xml) } if cache
       REXML::Document.new(xml)
     end
 
     # The Time of the most recently updated bookmark on del.icio.us.
     def last_updated_at
-      if cache_path
+      if cache
         @last_updated_at ||= remote_last_updated_at
       else
         remote_last_updated_at
@@ -79,6 +84,8 @@ module Delicious
 
   private
 
+    # A Time object representing when the most recent bookmark was created
+    # or updated.
     def remote_last_updated_at
       require 'rexml/document'
       doc = REXML::Document.new(request('update'))
@@ -91,7 +98,7 @@ module Delicious
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       res = http.start do |http|
-        req = Net::HTTP::Get.new("/v1/posts/#{method}", 'User-Agent' => 'bookmark.rb v1.0')
+        req = Net::HTTP::Get.new("/v1/posts/#{method}", 'User-Agent' => user_agent)
         req.basic_auth(user, password)
         http.request(req)
       end
@@ -116,7 +123,7 @@ if $0 == __FILE__
 
   assert_not_nil delicious.user
   assert_not_nil delicious.password
-  assert_not_nil delicious.cache_path
+  assert_not_nil delicious.cache
 
   updated = Time.iso8601("2008-04-03T12:57:15Z")
 

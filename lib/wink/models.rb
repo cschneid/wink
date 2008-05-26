@@ -146,12 +146,18 @@ class Bookmark < Entry
     Time.iso8601(latest.created_at.strftime("%FT%T%Z"))
   end
 
+  # Synchronize bookmarks with del.icio.us. The :delicious configuration option
+  # must be set to a two-tuple of the form: ['username','password']. Returns the
+  # number of bookmarks synchronized when successful or nil if del.icio.us
+  # synchronization is disabled.
   def self.synchronize(options={})
-    delicious = self.delicious.dup
+    return nil if Wink[:delicious].nil?
+    require 'wink/delicious'
+    delicious = Wink::Delicious.new(*Wink[:delicious])
     options.each { |key,val| delicious.send("#{key}=", val) }
     count = 0
     delicious.synchronize :since => last_updated_at do |source|
-      next if source[:href] =~ Weblog.url_regex
+      next if Wink[:url_regex] && source[:href] =~ Wink[:url_regex]
       next unless source[:shared]
       bookmark = find_or_create(:slug => source[:hash])
       bookmark.attributes = {

@@ -30,6 +30,11 @@ unless reloading?
   # The site's Akismet key, if spam detection should be performed.
   set :akismet, nil
 
+  # A del.icio.us username/password as a two-tuple: ['username', 'password'].
+  # When set, del.icio.us bookmark synchronization may be performed by calling
+  # Bookmark.synchronize!
+  set :delicious, nil
+
   # Where to write log messages.
   set :log_stream, STDERR
 
@@ -106,20 +111,6 @@ module Wink
     Sinatra.application
   end
 
-end
-
-
-class Entry #:nodoc:
-end
-
-class Bookmark < Entry
-  @delicious = nil
-  def self.configure
-    require 'delicious'
-    @delicious ||= Delicious::Synchronization.new
-    yield @delicious if block_given?
-    @delicious
-  end
 end
 
 # DEPRECATED: Weblog will be removed next-release-ish. Use +set+ or

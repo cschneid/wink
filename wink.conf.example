@@ -25,8 +25,13 @@ set :linkings, 'Linkings'
 set :begin_date, 2008
 
 ## Where to write log messages (defaults to STDERR)
-# set :log_stream, File.open('development.log', 'ab')
+#set :log_stream, File.open('development.log', 'ab')
 
+## This site's Akismet key (should pair with the url option).
+#set :akismet, 'd3cafbad'
+
+## The del.icio.us username/password used for bookmark synchronization.
+#set :delicious, %w[username password]
 
 # Database Configuration
 
