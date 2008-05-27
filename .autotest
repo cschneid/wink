@@ -1,0 +1,18 @@
+Autotest.add_hook :initialize do |at|
+  at.instance_eval do
+    add_exception(/\/?\.git\/.*/)
+    add_exception(/\.log$/)
+    add_exception(/(?:README|\.gitignore|\.gitmodules)$/)
+    add_exception(/^(?:\.\/)?(doc|bugs|sinatra)\//)
+    add_exception(/^(?:\.\/)?\.autotest/)
+
+    clear_mappings
+    all = proc { |vn,_| files_matching(/^test\/.*_test.rb$/) }
+    add_mapping(/lib\/.*\.rb/, &all)
+    add_mapping(/^(?:\.\/)?views\/.*$/, &all)
+    add_mapping(/^(?:\.\/)?test\/(?:help|fixtures)\.rb$/, &all)
+    add_mapping(/^(?:\.\/)?test\/.*_test\.rb$/) { |fn, _| fn }
+  end
+end
+
+# vim: ft=ruby
