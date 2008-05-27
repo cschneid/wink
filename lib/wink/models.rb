@@ -63,7 +63,6 @@ class Entry
     self.created_at = self.updated_at = DateTime.now if value && draft?
     @published = value
   end
-  alias publish= published=
 
   def draft?
     ! published

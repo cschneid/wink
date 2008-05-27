@@ -234,7 +234,6 @@ post '/drafts/' do
       Entry[params[:id].to_i]
     end
   @entry.tag_names = params[:tag_names]
-  @entry.publish = params[:publish] if params[:publish]
   @entry.attributes = params.to_hash
   @entry.save
   redirect entry_url(@entry)
