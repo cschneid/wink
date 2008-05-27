@@ -71,7 +71,7 @@ class DataMapper::Database
   end
 
   def create_logger
-    logger = Logger.new(Weblog.log_stream)
+    logger = Logger.new(Wink.log_stream)
     logger.level = Logger::DEBUG if development?
     logger.datetime_format = ''
     logger

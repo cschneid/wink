@@ -102,7 +102,7 @@ helpers do
   end
 
   def root_url(*args)
-    [ Weblog.url, *args ].compact.join("/")
+    [ Wink.url, *args ].compact.join("/")
   end
 
   def entry_url(entry)
@@ -152,33 +152,33 @@ helpers do
 end
 
 before do
-    @author = Weblog.author
-    @begin_date = Weblog.begin_date
+    @author = Wink.author
+    @begin_date = Wink.begin_date
 end
 
 # Resources =================================================================
 
 get '/' do
   redirect '/', 301 if params[:page]
-  @title = Weblog.title
+  @title = Wink.title
   @entries = Entry.published(:limit => 50)
   haml :home
 end
 
 get '/writings/' do
-  @title = Weblog.writings
+  @title = Wink.writings
   @entries = Article.published
   haml :home
 end
 
 get '/linkings/' do
-  @title = Weblog.linkings
+  @title = Wink.linkings
   @entries = Bookmark.published(:limit => 100)
   haml :home
 end
 
 get '/circa/:year/' do
-  @title = "#{Weblog.author} circa #{params[:year].to_i}"
+  @title = "#{Wink.author} circa #{params[:year].to_i}"
   @entries = Entry.published_circa(params[:year].to_i)
   haml :home
 end
@@ -253,14 +253,14 @@ end
 mime :atom, 'application/atom+xml'
 
 get '/feed' do
-  @title = Weblog.writings
+  @title = Wink.writings
   @entries = Article.published(:limit => 10)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
 end
 
 get '/linkings/feed' do
-  @title = Weblog.linkings
+  @title = Wink.linkings
   @entries = Bookmark.published(:limit => 30)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
@@ -342,7 +342,7 @@ helpers do
     @auth ||= Rack::Auth::Basic::Request.new(request.env)
   end
 
-  def unauthorized!(realm=Weblog.realm)
+  def unauthorized!(realm=Wink.realm)
     header 'WWW-Authenticate' => %(Basic realm="#{realm}")
     throw :halt, [ 401, 'Authorization Required' ]
   end
@@ -356,9 +356,9 @@ helpers do
   end
 
   def authorize
-    credentials = [ Weblog.username, Weblog.password ]
+    credentials = [ Wink.username, Wink.password ]
     if auth.provided? && credentials == auth.credentials
-      request.env['weblog.admin'] = true
+      request.env['wink.admin'] = true
       request.env['REMOTE_USER'] = auth.username
     end
   end

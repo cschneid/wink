@@ -1,4 +1,3 @@
-require 'net/http'
 require 'wink/akismet'
 
 class Entry
@@ -36,7 +35,7 @@ class Entry
   end
 
   def permalink
-    "#{Weblog.url}/#{stem}"
+    "#{Wink.url}/#{stem}"
   end
 
   def domain
@@ -305,7 +304,7 @@ class Comment
   def check
     @checked = true
     @spam = akismet(:check) || false
-  rescue ::Net::HTTPError => boom
+  rescue => boom
     logger.error "An error occured while connecting to Akismet: #{boom.to_s}"
     @checked = false
   end

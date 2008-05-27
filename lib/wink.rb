@@ -127,15 +127,3 @@ module Wink
   end
 
 end
-
-# DEPRECATED: Weblog will be removed next-release-ish. Use +set+ or
-# Wink::options to access configuration variables.
-module Weblog
-  extend self
-  def configure(&block)
-    yield Wink.options
-  end
-  def method_missing(name, *args, &block)
-    Wink.options.__send__(name, *args, &block)
-  end
-end
