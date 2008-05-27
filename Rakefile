@@ -80,23 +80,38 @@ desc 'Generate API documentation'
 task 'doc:api' => 'doc/api/index.html'
 
 file 'doc/api/index.html' => FileList['lib/**/*.rb','README'] do |f|
-  rb_files = f.prerequisites
   sh((<<-end).gsub(/\s+/, ' '))
-    rdoc --charset utf8 \
-         --fmt html \
-         --inline-source \
-         --line-numbers \
-         --main Wink \
-         --op doc/api \
-         --title 'Wink API Documentation' \
-         #{rb_files.join(' ')}
+    hanna --charset utf8 \
+          --fmt html \
+          --inline-source \
+          --line-numbers \
+          --main Wink \
+          --op doc/api \
+          --title 'Wink API Documentation' \
+          #{f.prerequisites.join(' ')}
   end
 end
 
 CLEAN.include 'doc/api'
 
 
-desc 'Publish docs to Rubyforge'
-task 'doc:publish' => [ 'doc' ] do |t|
-  sh 'scp -rp doc/* rubyforge.org:/var/www/gforge-projects/wink/'
+# Release Management/Maintenance Tasks =========================================
+
+namespace 'release' do
+
+  desc 'Update the ChangeLog with the current release'
+  task :log => [ :environment ] do
+    sh((<<-end).gsub(/^\s+/, ''))
+      ditz changelog #{Wink::VERSION} > ChangeLog.new &&
+      echo >> ChangeLog.new &&
+      cat ChangeLog >> ChangeLog.new &&
+      mv ChangeLog.new ChangeLog
+    end
+  end
+
+  desc 'Publish docs to Rubyforge'
+  task :docs => [ :doc ] do |t|
+    sh 'scp -rp doc/* rubyforge.org:/var/www/gforge-projects/wink/'
+  end
+
 end

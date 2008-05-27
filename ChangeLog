@@ -1,0 +1,6 @@
+== 0.1 / 2008-05-23
+* bugfix: Remove hard-coded Akismet key (cschneid)
+* bugfix: Sinatra reloading breaks DM models (cschneid)
+* feature: Template Anonymization (cschneid)
+* feature: Extract sources from http://tomayko.com
+* feature: LICENSE and README
