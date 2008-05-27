@@ -1,0 +1,23 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Separate customizable events / urls and templates from core -- allow for hacking
+desc: |-
+  We should keep all models, core helpers, and core Sinatra even handlers
+  under lib/wink but split out any helpers and event handlers that might be
+  customizable into a file at the root of the directory structure. The idea
+  is to make things that people would want to customize easy to get at without
+  throwing everything at them.
+type: :feature
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-27 19:32:00.538713 Z
+references: []
+
+id: 23296acc76e8c154b421a9ef68dc2acf1a90e453
+log_events: 
+- - 2008-05-27 19:32:01.570693 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

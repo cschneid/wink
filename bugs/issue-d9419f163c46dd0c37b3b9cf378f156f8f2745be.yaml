@@ -3,10 +3,10 @@ title: Akismet spam detection runs even when no Akismet key is specified
 desc: We should disable spam detection when no key is provided.
 type: :bugfix
 component: wink
-release: 
+release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-26 06:36:22.101109 Z
 references: []
 
@@ -15,4 +15,12 @@ log_events:
 - - 2008-05-26 06:36:23.877087 Z
   - Ryan Tomayko <r@tomayko.com>
   - created
+  - ""
+- - 2008-05-27 19:26:38.424197 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.2 from unassigned
+  - ""
+- - 2008-05-27 19:27:33.770085 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
   - ""

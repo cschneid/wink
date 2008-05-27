@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Database Template / Welcome Entry
+desc: |-
+  We need some kind welcome entry to load into an initial database so that
+  things aren't blank after initializing the database.
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-27 19:40:07.849117 Z
+references: []
+
+id: 42110a2fecc686e837199da325d2e2c395cca4dd
+log_events: 
+- - 2008-05-27 19:40:10.441009 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-27 19:40:33.114477 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - changed title
+  - ""

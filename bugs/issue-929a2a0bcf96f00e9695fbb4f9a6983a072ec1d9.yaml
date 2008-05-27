@@ -1,5 +1,5 @@
 --- !ditz.rubyforge.org,2008-03-06/issue 
-title: Use helpers for accessing author (and other Weblog attributes) instead of ivars
+title: Use wink.[option] for accessing author (and other options) instead of ivars
 desc: |-
   We're currently setting @author and @begin_date in a before block. It would be
   much easier to manage these types of variables if we exposed them via helper
@@ -19,3 +19,10 @@ log_events:
   - Ryan Tomayko <r@tomayko.com>
   - created
   - ""
+- - 2008-05-27 21:52:39.921213 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - changed title
+  - |-
+    Let's create a single wink helper that just returns the Wink module for now.
+    This will let us plumb in a different source of options in the future if we
+    need to.

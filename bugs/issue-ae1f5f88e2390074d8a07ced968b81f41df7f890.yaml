@@ -1,0 +1,20 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Remove broken text filters support (for now)
+desc: |-
+  There's stuff in the Entry models and draft views to support different types of 
+  text filters but it's just a shell and always uses markdown regardless.
+type: :task
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-27 22:36:50.356003 Z
+references: []
+
+id: ae1f5f88e2390074d8a07ced968b81f41df7f890
+log_events: 
+- - 2008-05-27 22:36:51.251703 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Use sqlite as default database
+desc: ""
+type: :feature
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-27 19:58:20.979557 Z
+references: []
+
+id: 29c4b76c3fca3624ec9b62c32bb92301fa35b411
+log_events: 
+- - 2008-05-27 19:58:21.723342 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

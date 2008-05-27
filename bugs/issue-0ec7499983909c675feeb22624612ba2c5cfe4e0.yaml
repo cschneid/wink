@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Add RDoc to model classes
+desc: ""
+type: :bugfix
+component: wink
+release: "0.3"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-05-27 20:00:36.505419 Z
+references: []
+
+id: 0ec7499983909c675feeb22624612ba2c5cfe4e0
+log_events: 
+- - 2008-05-27 20:00:37.265756 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

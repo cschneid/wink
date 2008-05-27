@@ -6,10 +6,10 @@ desc: |-
   and splitting things out into a couple of files.
 type: :task
 component: wink
-release: "0.3"
+release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 20:13:25.144424 Z
 references: []
 
@@ -19,3 +19,11 @@ log_events:
   - Ryan Tomayko <r@tomayko.com>
   - created
   - ""
+- - 2008-05-27 19:25:36.334203 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.2 from 0.3
+  - ""
+- - 2008-05-27 19:26:00.798980 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - Everything has been moved into a single wink.conf file.

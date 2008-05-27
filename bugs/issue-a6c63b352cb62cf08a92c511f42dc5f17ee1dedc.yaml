@@ -5,8 +5,8 @@ type: :bugfix
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 18:57:22.053672 Z
 references: []
 
@@ -16,3 +16,7 @@ log_events:
   - Ryan Tomayko <r@tomayko.com>
   - created
   - ""
+- - 2008-05-28 02:48:27.783042 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - Not quite the coverage I had hoped for but this is a good start.
