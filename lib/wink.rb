@@ -58,7 +58,7 @@ module Wink
 
   VERSION = '0.2'
 
-  # Application level options.
+  # An OpenStruct with all application options.
   def options
     Sinatra.application.options
   end
@@ -72,6 +72,21 @@ module Wink
   def []=(option_name, value)
     options.send("#{option_name}=", value)
   end
+
+  # Respond to any option attributes defined on the underlying #options
+  # object and also to all setter messages.
+  def respond_to?(name, include_private=false)
+    super ||
+      options.respond_to?(name, include_private) ||
+      name.to_s[-1] == ?=
+  end
+
+  # Delegate all messages to the underlying #options object.
+  def method_missing(name, *args, &block)
+    options.__send__(name, *args, &block)
+  end
+
+  private :method_missing
 
   # Load configuration from the file specified and/or by executing the block. If
   # both a file and block are given, the config file is loaded first and then
