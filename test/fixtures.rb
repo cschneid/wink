@@ -18,4 +18,9 @@ class Test::Unit::TestCase
       :title => "Sunday 1 January 1659/60"
   end
 
+  def create_test_bookmark(slug, options={})
+    options = { :slug => slug, :title => slug }.merge(options)
+    Bookmark.create!(options)
+  end
+
 end

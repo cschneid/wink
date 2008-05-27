@@ -88,6 +88,7 @@ module Wink
 
   private :method_missing
 
+
   # Load configuration from the file specified and/or by executing the block. If
   # both a file and block are given, the config file is loaded first and then
   # the block is executed.

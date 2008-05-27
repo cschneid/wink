@@ -60,8 +60,13 @@ class Entry
 
   def published=(value)
     value = ! ['false', 'no', '0', ''].include?(value.to_s)
-    self.created_at = self.updated_at = DateTime.now if value && draft?
+    self.created_at = self.updated_at = DateTime.now if value && draft? && !new_record?
     @published = value
+  end
+
+  def publish!
+    self.published = true
+    save
   end
 
   def draft?
@@ -90,27 +95,10 @@ class Entry
     tags.collect { |t| t.name }
   end
 
-  def self.all(options={})
-    return super if self == Entry
-    # XXX This shouldn't be necessary but DM isn't adding the type condition.
-    options = { :type => ([self] + self::subclasses.to_a) }.
-      merge(options)
-    super(options)
-  end
-
   def self.published(options={})
     options = { :order => 'created_at DESC', :published => true }.
       merge(options)
     all(options)
-  end
-
-  def self.published_circa(year, options={})
-    options = {
-      :created_at.gte => Date.new(year, 1, 1),
-      :created_at.lt => Date.new(year + 1, 1, 1),
-      :order => 'created_at ASC'
-    }.merge(options)
-    published(options)
   end
 
   def self.drafts(options={})
@@ -119,12 +107,44 @@ class Entry
     all(options)
   end
 
+  def self.circa(year, options={})
+    options = {
+      :created_at.gte => Date.new(year, 1, 1),
+      :created_at.lt => Date.new(year + 1, 1, 1),
+      :order => 'created_at ASC'
+    }.merge(options)
+    published(options)
+  end
+
   def self.tagged(tag, options={})
     if tag = Tag.first(:name => tag)
       tag.entries
     else
       []
     end
+  end
+
+  # The most recently published Entry (or specific subclass when called on
+  # Article, Bookmark, or other Entry subclass).
+  def self.latest(options={})
+    first({ :order => 'created_at DESC', :published => true }.merge(options))
+  end
+
+  # XXX The following two methods shouldn't be necessary but DM isn't adding
+  # the type condition.
+
+  def self.first(options={})
+    return super if self == Entry
+    options = { :type => ([self] + self::subclasses.to_a) }.
+      merge(options)
+    super(options)
+  end
+
+  def self.all(options={})
+    return super if self == Entry
+    options = { :type => ([self] + self::subclasses.to_a) }.
+      merge(options)
+    super(options)
   end
 
 end
@@ -140,14 +160,6 @@ class Bookmark < Entry
 
   def filter
     'markdown'
-  end
-
-  # The Time of the most recently updated Bookmark in UTC.
-  def self.last_updated_at
-    latest = first(:order => 'created_at DESC', :type => 'Bookmark')
-    # NOTE: we take DateTime through an ISO8601 string on purpose to maintain
-    # timezone info. DateTime#to_time does not work properly.
-    Time.iso8601(latest.created_at.strftime("%FT%T%Z"))
   end
 
   # Synchronize bookmarks with del.icio.us. The :delicious configuration option
@@ -179,6 +191,11 @@ class Bookmark < Entry
       count += 1
     end
     count
+  end
+
+  # The Time of the most recently updated Bookmark in UTC.
+  def self.last_updated_at
+    latest && latest.created_at
   end
 
 end

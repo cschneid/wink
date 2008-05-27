@@ -179,7 +179,7 @@ end
 
 get '/circa/:year/' do
   @title = "#{Wink.author} circa #{params[:year].to_i}"
-  @entries = Entry.published_circa(params[:year].to_i)
+  @entries = Entry.circa(params[:year].to_i)
   haml :home
 end
 
