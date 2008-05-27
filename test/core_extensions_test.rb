@@ -23,7 +23,6 @@ describe 'DateTime' do
 
 end
 
-
 describe 'Date' do
 
   it 'uses a more sane implementation of #inspect' do

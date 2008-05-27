@@ -1,12 +1,12 @@
 # Various extensions to core and library classes.
 
-
+require 'date'
 require 'time'
+
 class DateTime
   # ISO 8601 formatted time value. This is 
-  def iso8601
-    to_s
-  end
+  alias_method :iso8601, :to_s
+
   def inspect
     "#<DateTime: #{to_s}>"
   end
@@ -19,6 +19,7 @@ class Date
 end
 
 require 'rack'
+
 module Rack
   class Request
 
@@ -59,6 +60,7 @@ end
 
 
 require 'data_mapper'
+
 class DataMapper::Database
 
   class Logger < ::Logger
@@ -83,12 +85,14 @@ class DataMapper::Database
   end
 
   def self.create!(options={})
+    require 'wink/models'
     [ Entry, Comment, Tag, Tagging ].each do |model|
       model.table.create! options[:force]
     end
   end
 
   def self.drop!
+    require 'wink/models'
     [ Entry, Comment, Tag, Tagging ].each do |model|
       model.table.drop!
     end

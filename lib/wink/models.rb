@@ -4,20 +4,17 @@ require 'wink/akismet'
 class Entry
   include DataMapper::Persistence
 
-  property :slug, :string, :size => 255, :nullable => false
-  property :type, :class, :nullable => false
+  property :id, :integer, :serial => true
+  property :slug, :string, :size => 255, :nullable => false, :index => :unique
+  property :type, :class, :nullable => false, :index => true
   property :published, :boolean, :default => false
   property :title, :string, :size => 255, :nullable => false
   property :summary, :text, :lazy => false
   property :filter, :string, :size => 20, :default => 'markdown'
   property :url, :string, :size => 255
-  property :created_at, :datetime, :nullable => false
+  property :created_at, :datetime, :nullable => false, :index => true
   property :updated_at, :datetime, :nullable => false
   property :body, :text
-
-  index [ :slug ], :unique => true
-  index [ :type ]
-  index [ :created_at ]
 
   validates_presence_of :title, :slug, :filter
 
@@ -27,6 +24,12 @@ class Entry
 
   has_and_belongs_to_many :tags,
     :join_table => 'taggings'
+
+  def initialize(attributes={})
+    @created_at = DateTime.now
+    @filter = 'markdown'
+    super
+  end
 
   def stem
     "writings/#{slug}"
@@ -42,20 +45,29 @@ class Entry
     end
   end
 
-  def created_at
-    @created_at ||= Time.now
+  def created_at=(value)
+    value = value.to_datetime if value.respond_to?(:to_datetime)
+    @created_at = value
   end
 
-  def filter
-    @filter ||= 'markdown'
+  def updated_at=(value)
+    value = value.to_datetime if value.respond_to?(:to_datetime)
+    @updated_at = value
   end
 
   def published?
-    [1,true].include?(published)
+    !! published
   end
 
+  def published=(value)
+    value = ! ['false', 'no', '0', ''].include?(value.to_s)
+    self.created_at = self.updated_at = DateTime.now if value && draft?
+    @published = value
+  end
+  alias publish= published=
+
   def draft?
-    ! published?
+    ! published
   end
 
   def body?
@@ -80,15 +92,9 @@ class Entry
     tags.collect { |t| t.name }
   end
 
-  def publish=(value)
-    value = ['Publish', '1', 'true', 'yes'].include?(value.to_s)
-    self.created_at = self.updated_at = Time.now if value && draft?
-    self.published = value
-  end
-
-  # This shouldn't be necessary but DM isn't adding the type condition.
   def self.all(options={})
     return super if self == Entry
+    # XXX This shouldn't be necessary but DM isn't adding the type condition.
     options = { :type => ([self] + self::subclasses.to_a) }.
       merge(options)
     super(options)
@@ -183,11 +189,10 @@ end
 class Tag
   include DataMapper::Persistence
 
-  property :name, :string, :nullable => false
+  property :id, :integer, :serial => true
+  property :name, :string, :nullable => false, :index => :unique
   property :created_at, :datetime, :nullable => false
   property :updated_at, :datetime, :nullable => false
-
-  index [ :name ], :unique => true
 
   has_and_belongs_to_many :entries,
     :conditions => { :published => true },
@@ -199,33 +204,33 @@ class Tag
   end
 end
 
+
 class Tagging
   include DataMapper::Persistence
 
   belongs_to :entry
   belongs_to :tag
-  index [ :entry_id ]
-  index [ :tag_id ]
+  index [:entry_id]
+  index [:tag_id]
 end
+
 
 class Comment
   include DataMapper::Persistence
 
+  property :id, :integer, :serial => true
   property :author, :string, :size => 80
   property :ip, :string, :size => 50
   property :url, :string, :size => 255
-  property :body, :text
-  property :created_at, :datetime, :nullable => false
+  property :body, :text, :nullable => false
+  property :created_at, :datetime, :nullable => false, :index => true
   property :referrer, :string, :size => 255
   property :user_agent, :string, :size => 255
   property :checked, :boolean, :default => false
-  property :spam, :boolean, :default => false
+  property :spam, :boolean, :default => false, :index => true
 
   belongs_to :entry
-
   index [ :entry_id ]
-  index [ :spam ]
-  index [ :created_at ]
 
   validates_presence_of :body
   validates_presence_of :entry_id
