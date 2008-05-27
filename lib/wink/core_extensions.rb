@@ -5,10 +5,18 @@ require 'time'
 class DateTime
   # ISO 8601 formatted time value. This is 
   def iso8601
-    to_time.iso8601
+    to_s
+  end
+  def inspect
+    "#<DateTime: #{to_s}>"
   end
 end
 
+class Date
+  def inspect
+    "#<Date: #{to_s}>"
+  end
+end
 
 require 'rack'
 module Rack
