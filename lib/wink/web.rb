@@ -228,7 +228,7 @@ end
 post '/drafts/' do
   require_administrative_privileges
   @entry =
-    if params[:id].nil? || params[:id].empty?
+    if params[:id].blank?
       Article.new
     else
       Entry[params[:id].to_i]

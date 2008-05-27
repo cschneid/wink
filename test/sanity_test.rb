@@ -16,6 +16,21 @@ describe 'The Top Level' do
 
 end
 
+describe 'String' do
+
+  it 'responds to blank?' do
+    [ '', nil, [], {} ].each do |o|
+      o.should.respond_to :blank?
+      o.blank?.should.be true
+    end
+    [ 0, ['hi'], { :a => 1 } ].each do |o|
+      o.should.respond_to :blank?
+      o.blank?.should.be false
+    end
+  end
+
+end
+
 describe 'Sinatra' do
 
   it 'should not have reloading enabled in test environment' do

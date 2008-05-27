@@ -69,7 +69,7 @@ class Entry
   end
 
   def body?
-    ! body.empty?
+    ! body.blank?
   end
 
   def tag_names=(value)
@@ -259,11 +259,7 @@ class Comment
   end
 
   def url
-    if @url.to_s.strip.blank?
-      nil
-    else
-      @url.strip
-    end
+    @url.strip unless @url.to_s.strip.blank?
   end
 
   def author_link
