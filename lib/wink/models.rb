@@ -19,7 +19,7 @@ class Entry
   index [ :type ]
   index [ :created_at ]
 
-  #validates_presence_of :title, :slug, :filter
+  validates_presence_of :title, :slug, :filter
 
   has_many :comments,
     :spam.not => true,
@@ -227,8 +227,8 @@ class Comment
   index [ :spam ]
   index [ :created_at ]
 
-  #validates_presence_of :body
-  #validates_presence_of :entry_id
+  validates_presence_of :body
+  validates_presence_of :entry_id
 
   before_create do |comment|
     comment.check

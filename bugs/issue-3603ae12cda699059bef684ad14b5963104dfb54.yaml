@@ -1,0 +1,24 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Model validators cause errors on reload
+desc: |-
+  The validators had to be disabled due to a duplicate key error or something on
+  reloads.
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-05-27 11:59:38.315224 Z
+references: []
+
+id: 3603ae12cda699059bef684ad14b5963104dfb54
+log_events: 
+- - 2008-05-27 11:59:39.243104 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-05-27 11:59:51.859525 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""
