@@ -7,6 +7,11 @@ task :test do
   sh "testrb test/*_test.rb"
 end
 
+desc 'Run specs'
+task :spec do
+  sh "specrb -s test/*_test.rb"
+end
+
 desc 'Start a development server'
 task :start do
   command = "ruby wink -e #{wink_environment}"
