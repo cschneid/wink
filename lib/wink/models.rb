@@ -1,3 +1,4 @@
+require 'wink'
 require 'wink/akismet'
 
 class Entry
@@ -28,6 +29,7 @@ class Entry
     @created_at = DateTime.now
     @filter = 'markdown'
     super
+    yield self if block_given?
   end
 
   def stem
@@ -133,18 +135,33 @@ class Entry
   # XXX The following two methods shouldn't be necessary but DM isn't adding
   # the type condition.
 
-  def self.first(options={})
+  def self.first(options={}) #:nodoc:
     return super if self == Entry
     options = { :type => ([self] + self::subclasses.to_a) }.
       merge(options)
     super(options)
   end
 
-  def self.all(options={})
+  def self.all(options={}) #:nodoc:
     return super if self == Entry
     options = { :type => ([self] + self::subclasses.to_a) }.
       merge(options)
     super(options)
+  end
+
+  # XXX neither ::create or ::create! pass the block parameter to ::new so
+  # we need to override to fix that.
+
+  def self::create(attributes={}, &block) #:nodoc:
+    instance = new(attributes, &block)
+    instance.save
+    instance
+  end
+
+  def self::create!(attributes={}, &block) #:nodoc:
+    instance = create(attributes, &block)
+    raise DataMapper::InvalidRecord, instance if instance.errors.any?
+    instance
   end
 
 end

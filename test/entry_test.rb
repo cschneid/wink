@@ -24,6 +24,52 @@ describe 'Entry' do
     entry.created_at.should.be.kind_of DateTime
   end
 
+  it 'takes a block when creating with ::new' do
+    block_run = false
+    entry =
+      Entry.new :slug => 'test' do |entry|
+        block_run = true
+        entry.title = 'Test Entry'
+        entry.body = 'nothing to see here'
+      end
+    block_run.should.equal true
+    entry.slug.should.equal 'test'
+    entry.title.should.equal 'Test Entry'
+    entry.body.should.equal 'nothing to see here'
+  end
+
+  it 'takes a block when creating with ::create' do
+    block_run = false
+    entry =
+      Entry.create :slug => 'test' do |entry|
+        block_run = true
+        entry.should.be.new_record
+        entry.title = 'Test Entry'
+        entry.body = 'nothing to see here'
+      end
+    block_run.should.equal true
+    entry.should.not.be.new_record
+    entry.slug.should.equal 'test'
+    entry.title.should.equal 'Test Entry'
+    entry.body.should.equal 'nothing to see here'
+  end
+
+  it 'takes a block when creating with ::create!' do
+    block_run = false
+    entry =
+      Entry.create! :slug => 'test' do |entry|
+        block_run = true
+        entry.should.be.new_record
+        entry.title = 'Test Entry'
+        entry.body = 'nothing to see here'
+      end
+    block_run.should.equal true
+    entry.should.not.be.new_record
+    entry.slug.should.equal 'test'
+    entry.title.should.equal 'Test Entry'
+    entry.body.should.equal 'nothing to see here'
+  end
+
   it "find only Articles via Article::first (STI)" do
     entry = create_article_from_pepys_diary('1659-01-01')
     entry.should.not.be nil
