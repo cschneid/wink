@@ -229,7 +229,7 @@ class Tag
 end
 
 
-class Tagging
+class Tagging #:nodoc:
   include DataMapper::Persistence
 
   belongs_to :entry
@@ -256,8 +256,7 @@ class Comment
   belongs_to :entry
   index [ :entry_id ]
 
-  validates_presence_of :body
-  validates_presence_of :entry_id
+  validates_presence_of :body, :entry_id
 
   before_create do |comment|
     comment.check
@@ -285,6 +284,7 @@ class Comment
   end
 
   def url
+    # TODO move this kind of logic into the setter
     @url.strip unless @url.to_s.strip.blank?
   end
 
@@ -309,20 +309,10 @@ class Comment
     end
   end
 
-  # Has the current comment been marked as spam?
-  def spam?
-    spam
-  end
-
-  # Opposite of #spam? -- true when the comment has not been marked as
-  # spam.
-  def ham?
-    ! spam?
-  end
-
   # Check the comment with Akismet. The spam attribute is updated to reflect
   # whether the spam was detected or not.
   def check
+    return true if @checked
     @checked = true
     @spam = akismet(:check) || false
   rescue => boom
@@ -333,15 +323,34 @@ class Comment
   # Check the comment with Akismet and immediately save the comment.
   def check!
     check
-    save!
+    save
   end
 
-  # Mark this comment as spam and immediately save the comment. If Akismet is
+  # Has the current comment been marked as spam?
+  def spam?
+    !! spam
+  end
+
+  # Mark this comment as Spam and immediately save the comment. If Akismet is
   # enabled, the comment is submitted as spam.
   def spam!
-    @spam = true
+    @checked = @spam = true
     akismet :spam!
-    save!
+    save
+  end
+
+  # Opposite of #spam? -- true when the comment has not been marked as
+  # spam.
+  def ham?
+    ! spam
+  end
+
+  # Mark this comment as Ham and immediately save the comment. If Akismet is
+  # enabled, the comment is submitted as Ham.
+  def ham!
+    @checked, @spam = true, false
+    akismet :ham!
+    save
   end
 
 private
