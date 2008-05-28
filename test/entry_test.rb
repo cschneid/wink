@@ -188,3 +188,101 @@ describe 'Entry' do
   end
 
 end
+
+
+describe "Entry#tags association" do
+
+  before(:each) { setup_database }
+  after(:each)  { teardown_database }
+
+  it 'can be used to tag new entries' do
+    entry = Entry.new(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.should.be.new_record
+    entry.tags << Tag.new(:name => 'foo')
+    entry.tags << Tag.new(:name => 'bar')
+    entry.tags << Tag.new(:name => 'baz')
+    entry.tags.length.should.be 3
+    entry.should.be.new_record
+    entry.tags.each { |t| t.should.be.new_record }
+    entry.save
+    entry.should.not.be.new_record
+    entry.tags.each { |t| t.should.not.be.new_record }
+  end
+
+  it 'can be used to tag saved entries' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.should.not.be.new_record
+    entry.errors.should.be.empty
+    entry.tags << Tag.new(:name => 'foo')
+    entry.tags << Tag.new(:name => 'bar')
+    entry.tags << Tag.new(:name => 'baz')
+    entry.tags.length.should.be 3
+    entry.tags.each { |t| t.should.be.new_record }
+    entry.save
+    entry.tags.each { |t| t.should.not.be.new_record }
+  end
+
+  it 'can be cleared' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.should.not.be.new_record
+    entry.errors.should.be.empty
+    %w[foo bar baz].each { |t| entry.tags << Tag.new(:name => t) }
+    entry.save.should.be.truthful
+    entry.tags.length.should.be 3
+    entry.tags.should.respond_to :clear
+    entry.tags.clear
+    entry.tags.length.should.be 0
+    # it doesn't persist the clear until saved ... watch when we reload:
+    entry = Entry.first(:slug => 'test')
+    entry.tags.length.should.be 3
+    # clear it again and save
+    entry.tags.clear
+    entry.save
+    entry = Entry.first(:slug => 'test')
+    entry.tags.should.be.empty
+  end
+
+end
+
+describe 'Entry#tag_names attribute' do
+
+  before(:each) { setup_database }
+  after(:each)  { teardown_database }
+
+  it 'takes an array of strings' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.tag_names = ['foo','bar','baz']
+    entry.save
+    entry.errors.should.be.empty
+    entry.tags.length.should.be 3
+    entry.tag_names.sort.should.be == ['bar','baz','foo']
+  end
+
+  it 'takes a space separated string' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.tag_names = 'foo bar baz'
+    entry.save
+    entry.errors.should.be.empty
+    entry.tags.length.should.be 3
+    entry.tag_names.sort.should.be == ['bar','baz','foo']
+  end
+
+  it 'takes a comma separated string' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.tag_names = 'foo, bar, baz'
+    entry.save
+    entry.errors.should.be.empty
+    entry.tags.length.should.be 3
+    entry.tag_names.sort.should.be == ['bar','baz','foo']
+  end
+
+  it 'automatically removes duplicate tags' do
+    entry = Entry.create(:slug => 'test', :title => 'Test Tagging Entry')
+    entry.tag_names = %w[foo bar baz bar foo]
+    entry.save
+    entry.errors.should.be.empty
+    entry.tags.length.should.be 3
+    entry.tag_names.sort.should.be == ['bar','baz','foo']
+  end
+
+end
