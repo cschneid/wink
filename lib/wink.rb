@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'wink/core_extensions'
+require 'wink/schema'
 
 # Tell Sinatra to not automatically start a server.
 set :run, false

@@ -49,13 +49,15 @@ namespace :db do
 
   desc 'Create all database tables'
   task :init => [ :environment ] do
-    Database.create!
+    Database.create! :welcome => true
   end
 
   desc 'Drop all database tables'
   task :drop => [ :environment ] do
     Database.drop!
   end
+
+  task :reset => [ :drop, :init ]
 
 end
 

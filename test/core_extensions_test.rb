@@ -87,11 +87,10 @@ describe 'Rack::Request#remote_ip' do
 end
 
 
-describe 'Database' do
+describe 'Database (DEPRECATED)' do
 
-  it 'is defined as shortcut to DataMapper::Database' do
+  it 'is defined' do
     Object.const_defined?(:Database).should.be.truthful
-    Database.should.be DataMapper::Database
   end
 
   it 'responds to ::configure, ::create!, and ::drop!' do

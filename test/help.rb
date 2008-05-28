@@ -18,17 +18,16 @@ require 'sinatra/test/spec'
 gem 'do_sqlite3', '=0.2.5'
 require 'do_sqlite3'
 
+Database.configure \
+  :adapter    => 'sqlite3',
+  :database   => 'wink_test.sqlite3'
+
 Wink.configure do
   set :env, :test
   set :url, 'http://test.local'
   set :author, 'John Doe'
   set :log_stream, File.open('test.log', 'wb')
-
-  Database.configure \
-    :adapter    => 'sqlite3',
-    :database   => 'wink_test.sqlite3'
 end
-
 
 class Test::Unit::TestCase
 

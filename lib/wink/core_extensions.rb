@@ -3,7 +3,7 @@
 require 'date'
 require 'time'
 
-class DateTime
+class DateTime #:nodoc:
   # ISO 8601 formatted time value. This is 
   alias_method :iso8601, :to_s
 
@@ -12,7 +12,7 @@ class DateTime
   end
 end
 
-class Date
+class Date #:nodoc:
   def inspect
     "#<Date: #{to_s}>"
   end
@@ -61,7 +61,7 @@ end
 gem 'datamapper', '=0.2.5'
 require 'data_mapper'
 
-class DataMapper::Database
+class DataMapper::Database #:nodoc:
 
   class Logger < ::Logger
     def format_message(sev, date, message, progname)
@@ -77,27 +77,4 @@ class DataMapper::Database
     logger
   end
 
-  # Acts exactly like Database#setup but runs exactly once. Multiple calls
-  # to Database#setup result in multiple database connections being
-  # established.
-  def self.configure(options={})
-    setup(options) unless reloading?
-  end
-
-  def self.create!(options={})
-    require 'wink/models'
-    [ Entry, Comment, Tag, Tagging ].each do |model|
-      model.table.create! options[:force]
-    end
-  end
-
-  def self.drop!
-    require 'wink/models'
-    [ Entry, Comment, Tag, Tagging ].each do |model|
-      model.table.drop!
-    end
-  end
-
 end
-
-Database = DataMapper::Database
