@@ -115,3 +115,22 @@ namespace 'release' do
   end
 
 end
+
+# Git Submodule Tasks =========================================================
+
+namespace 'submodule' do
+  desc 'Init the sinatra submodule'
+  task :init do |t|
+    unless File.exist? 'sinatra/lib/sinatra.rb'
+      rm_rf 'sinatra'
+      sh 'git submodule init sinatra'
+    end
+  end
+
+  desc 'Update the sinatra submodule'
+  task :update => :init do
+    sh 'git submodule update sinatra'
+  end
+end
+
+task :submodule => 'submodule:update'
