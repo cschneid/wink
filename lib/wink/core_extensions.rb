@@ -58,7 +58,7 @@ def reloading?
   Sinatra.application.reloading?
 end
 
-
+gem 'datamapper', '=0.2.5'
 require 'data_mapper'
 
 class DataMapper::Database
