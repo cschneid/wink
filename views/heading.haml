@@ -7,4 +7,4 @@
     = wink.author
     </a>
   %p
-    = (@begin_date..Date.today.year).to_a.map{ |y| "<a href='/circa/#{y}/'>#{y}</a>" }.join(', ')
+    = (wink.begin_date..Date.today.year).to_a.map{ |y| "<a href='/circa/#{y}/'>#{y}</a>" }.join(', ')
