@@ -4,7 +4,7 @@
   %head
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'>
     <meta http-equiv='X-UA-Compatible' content='YOUR MOM'>
-    %title= (h(@title) || @author)
+    %title= (h(@title) || wink.author)
     = feed '/feed',          "Writings"
     = feed '/linkings/feed', "Linkings"
     = feed '/comments/feed', "Comments (Experimental)"
@@ -24,7 +24,7 @@
       #footer
         %p.rights
           = "Copyright &copy; #{[@begin_date, Date.today.year].uniq.join('-')} by"
-          %a{ :href => Wink.url }= @author
+          %a{ :href => wink.url }= wink.author
           (
           %a{:href=>"http://creativecommons.org/licenses/by-sa/2.5/", :rel => "license"}license information
           )

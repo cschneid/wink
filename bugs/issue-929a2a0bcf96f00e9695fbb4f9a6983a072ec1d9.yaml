@@ -8,8 +8,8 @@ type: :task
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 19:55:05.488821 Z
 references: []
 
@@ -26,3 +26,7 @@ log_events:
     Let's create a single wink helper that just returns the Wink module for now.
     This will let us plumb in a different source of options in the future if we
     need to.
+- - 2008-05-29 14:42:24.521227 Z
+  - cypher <cypher@nuclearsquid.com>
+  - closed issue with disposition fixed
+  - ""

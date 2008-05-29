@@ -7,7 +7,7 @@
       %p.meta.caps
         = entry.created_at.strftime('%A, %B %d, %Y at %I:%M %p')
         \/ By 
-        = @author
+        = wink.author
         -if entry.domain
           = "/ #{entry.domain}"
       ~ content_filter(entry.summary, :markdown)

@@ -102,7 +102,7 @@ helpers do
   end
 
   def root_url(*args)
-    [ Wink.url, *args ].compact.join("/")
+    [ wink.url, *args ].compact.join("/")
   end
 
   def entry_url(entry)
@@ -149,36 +149,34 @@ helpers do
     } << "</select>"
   end
 
-end
-
-before do
-    @author = Wink.author
-    @begin_date = Wink.begin_date
+  def wink
+    Wink
+  end
 end
 
 # Resources =================================================================
 
 get '/' do
   redirect '/', 301 if params[:page]
-  @title = Wink.title
+  @title = wink.title
   @entries = Entry.published(:limit => 50)
   haml :home
 end
 
 get '/writings/' do
-  @title = Wink.writings
+  @title = wink.writings
   @entries = Article.published
   haml :home
 end
 
 get '/linkings/' do
-  @title = Wink.linkings
+  @title = wink.linkings
   @entries = Bookmark.published(:limit => 100)
   haml :home
 end
 
 get '/circa/:year/' do
-  @title = "#{Wink.author} circa #{params[:year].to_i}"
+  @title = "#{wink.author} circa #{params[:year].to_i}"
   @entries = Entry.circa(params[:year].to_i)
   haml :home
 end
@@ -252,14 +250,14 @@ end
 mime :atom, 'application/atom+xml'
 
 get '/feed' do
-  @title = Wink.writings
+  @title = wink.writings
   @entries = Article.published(:limit => 10)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
 end
 
 get '/linkings/feed' do
-  @title = Wink.linkings
+  @title = wink.linkings
   @entries = Bookmark.published(:limit => 30)
   content_type :atom, :charset => 'utf-8'
   builder :feed, :layout => :none
@@ -341,7 +339,7 @@ helpers do
     @auth ||= Rack::Auth::Basic::Request.new(request.env)
   end
 
-  def unauthorized!(realm=Wink.realm)
+  def unauthorized!(realm=wink.realm)
     header 'WWW-Authenticate' => %(Basic realm="#{realm}")
     throw :halt, [ 401, 'Authorization Required' ]
   end
@@ -355,7 +353,7 @@ helpers do
   end
 
   def authorize
-    credentials = [ Wink.username, Wink.password ]
+    credentials = [ wink.username, wink.password ]
     if auth.provided? && credentials == auth.credentials
       request.env['wink.admin'] = true
       request.env['REMOTE_USER'] = auth.username

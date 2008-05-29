@@ -4,7 +4,7 @@
     and <a href='/linkings/'>linkings</a> of
   %h1
     <a href='/'>
-    = @author
+    = wink.author
     </a>
   %p
     = (@begin_date..Date.today.year).to_a.map{ |y| "<a href='/circa/#{y}/'>#{y}</a>" }.join(', ')
