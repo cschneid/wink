@@ -14,6 +14,10 @@ require 'wink'
 require 'sinatra/test/unit'
 require 'sinatra/test/spec'
 
+# Use SQLite3 for now
+gem 'do_sqlite3', '=0.2.5'
+require 'do_sqlite3'
+
 Wink.configure do
   set :env, :test
   set :url, 'http://test.local'
@@ -21,11 +25,8 @@ Wink.configure do
   set :log_stream, File.open('test.log', 'wb')
 
   Database.configure \
-    :adapter    => 'mysql',
-    :host       => 'localhost',
-    :username   => 'root',
-    :password   => '',
-    :database   => 'wink_test'
+    :adapter    => 'sqlite3',
+    :database   => 'wink_test.sqlite3'
 end
 
 

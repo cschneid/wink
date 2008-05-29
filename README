@@ -23,6 +23,9 @@ Gems (need all their dependencies of course):
     $ sudo gem install do_mysql
     $ sudo gem install sinatra BlueCloth rubypants html5
 
+To run the specs you also need SQLite3 and the SQLite3-adapter:
+    $ sudo gem install do_sqlite3 --version=0.2.5
+
 We are currently developing on MySQL only. Other databases are theoretically
 easy to support but we're limiting to one for now to speed initial development.
 
