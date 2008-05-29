@@ -7,7 +7,7 @@ type: :feature
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
+status: :in_progress
 disposition: 
 creation_time: 2008-05-27 19:40:07.849117 Z
 references: []
@@ -21,4 +21,8 @@ log_events:
 - - 2008-05-27 19:40:33.114477 Z
   - Ryan Tomayko <r@tomayko.com>
   - changed title
+  - ""
+- - 2008-05-29 21:40:48.986297 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - changed status from unstarted to in_progress
   - ""

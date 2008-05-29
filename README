@@ -21,13 +21,14 @@ Gems (need all their dependencies of course):
 
     $ sudo gem install datamapper --version=0.2.5
     $ sudo gem install do_mysql
-    $ sudo gem install sinatra BlueCloth rubypants html5
+    $ sudo gem install sinatra BlueCloth rubypants html5 test-spec
 
 To run the specs you also need SQLite3 and the SQLite3-adapter:
     $ sudo gem install do_sqlite3 --version=0.2.5
 
-We are currently developing on MySQL only. Other databases are theoretically
-easy to support but we're limiting to one for now to speed initial development.
+We are currently developing on MySQL and SQLite3. Other databases are
+theoretically easy to support but we're limiting to these for now to speed
+initial development.
 
 Wink is developed primarily under MacOS X and tested on FreeBSD and
 a variety of GNU/Linux distributions.
