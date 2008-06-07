@@ -1,3 +1,6 @@
 [submodule "sinatra"]
 	path = sinatra
 	url = git://github.com/rtomayko/sinatra.git
+[submodule "rack"]
+	path = rack
+	url = git://github.com/chneukirchen/rack.git
