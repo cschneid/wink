@@ -60,6 +60,9 @@ unless reloading?
   # Start date for archives + copyright notice.
   set :begin_date, Date.today.year
 
+  # List of filters to apply to comments.
+  set :comment_filters, [:markdown, :sanitize]
+
 end
 
 

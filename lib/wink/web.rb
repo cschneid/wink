@@ -1,48 +1,70 @@
 require 'sinatra'
 require 'haml'
-require 'bluecloth'
-require 'rubypants'
 require 'html5/html5parser'
 require 'html5/sanitizer'
 
 require 'wink'
+require 'wink/markdown'
 require 'wink/models'
 
-
-helpers do
+module Wink::Helpers
   include Rack::Utils
+  alias :h :escape_html
 
-  def h(string)
-    escape_html(string)
-  end
-
-  def markdown_filter(text)
-    html = BlueCloth.new(text || '').to_html
-    html.chomp!
-    html.chomp!('<hr/>')
-    html.chomp!
-    RubyPants.new(html).to_html
-  rescue => boom
-    "<p><strong>Boom!</strong></p><pre>#{h(boom.to_s)}</pre>"
-  end
-
-  def text_filter(text)
-    "<p>#{escape_html(text || '')}</p>"
-  end
-
-  def html_filter(text)
-    text || ''
-  end
-
-  def content_filter(text, filter=:markdown)
-    send("#{filter}_filter", text)
-  end
-
-  # Sanitize HTML using html5lib.
+  # Sanitize HTML - removes potentially dangerous markup like <script> and
+  # <object> tags.
   def sanitize(html)
     HTML5::HTMLParser.
       parse_fragment(html, :tokenizer => HTML5::HTMLSanitizer, :encoding => 'utf-8').
       to_s
+  end
+
+  # Convert text to HTML using Markdown (includes text smartification). Uses
+  # RDiscount if available and falls back to BlueCloth.
+  def markdown(text)
+    return '' if text.nil? || text.empty?
+    Wink::Markdown.new(text, :smart).to_html
+  end
+
+  # Make text "smart" by converting dumb puncuation characters to their
+  # high-class equivalents.
+  def smartify(text)
+    return '' if text.nil? || text.empty?
+    RubyPants.new(text).to_html
+  end
+
+  # Apply a list of content filters to text. Calls each helper method in
+  # the order specified with the result of the previous operation. The following
+  # are equivalent:
+  #
+  #   filter "Hello, World.", :markdown, :sanitize
+  #   sanitize(markdown("Hello, World."))
+  #
+  def filter(text, *filters)
+    filters.inject(text) do |text,method_name|
+      send(method_name, text)
+    end
+  rescue => boom
+    "<p><strong>Boom!</strong></p><pre>#{escape_html(boom.to_s)}</pre>"
+  end
+
+  def html(text)
+    text || ''
+  end
+
+  # The comment's formatted body.
+  def comment_body(comment=@comment)
+    filter(comment.body, *Wink.comment_filters)
+  end
+
+  # The entry's formatted body.
+  def entry_body(entry=@entry)
+    filter(entry.body, entry.filter)
+  end
+
+  # The entry's formatted summary.
+  def entry_summary(entry=@entry)
+    filter(entry.summary, :markdown)
   end
 
   # Convert hash to HTML attribute string.
@@ -152,7 +174,13 @@ helpers do
   def wink
     Wink
   end
+
 end
+
+
+# Bring Wink::Helpers into Sinatra
+helpers { include Wink::Helpers }
+
 
 # Resources =================================================================
 
@@ -307,7 +335,7 @@ end
 get '/comments/:id' do
   comment = Comment[params[:id].to_i]
   raise Sinatra::NotFound if comment.nil?
-  content_filter(comment.body, :markdown)
+  comment_body(comment)
 end
 
 post '/writings/:slug/comment' do

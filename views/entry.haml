@@ -11,7 +11,7 @@
       </a>
 
   #body
-    ~ content_filter(@entry.body, @entry.filter)
+    ~ entry_body
 
   #appendix
     %p
@@ -31,31 +31,31 @@
     -if @comments && @comments.any?
       %h2 Discuss
       %ol.comments
-        - @comments.each do |c|
-          %li.comment.container{:id=>"comment-#{c.id}"}
+        - @comments.each do |@comment|
+          %li.comment.container{:id=>"comment-#{@comment.id}"}
             .body
-              ~ sanitize(content_filter(c.body, :markdown))
+              ~ comment_body
             -if admin?
-              %form{:action=>"/comments/#{c.id}",:style=>'display:none'}
+              %form{:action=>"/comments/#{@comment.id}",:style=>'display:none'}
                 %div
-                  ~ textarea :body, c.body, :rows => 5
+                  ~ textarea :body, @comment.body, :rows => 5
                   <input type='submit' value='Save'>
             %p.comment-meta
               &mdash; 
-              -if c.author_link?
-                %a.commentor{:href => h(c.author_link)}= h(c.author)
+              -if @comment.author_link?
+                %a.commentor{:href => h(@comment.author_link)}= h(@comment.author)
               -else
-                %span.commentor= h(c.author)
+                %span.commentor= h(@comment.author)
               on
-              = c.created_at.strftime("%A, %B %d, %Y")
+              = @comment.created_at.strftime("%A, %B %d, %Y")
               at
-              = c.created_at.strftime("%I:%M %p")
+              = @comment.created_at.strftime("%I:%M %p")
               -if admin?
-                %a{:href => "/comments/#{c.id}", :class => 'edit' }Edit
+                %a{:href => "/comments/#{@comment.id}", :class => 'edit' }Edit
                 |
-                %a{:href => "/comments/#{c.id}", :rel => 'delete' }Delete
+                %a{:href => "/comments/#{@comment.id}", :rel => 'delete' }Delete
                 |
-              %a{:title=>'Permanent link to this comment', :href=>"#comment-#{c.id}"}#
+              %a{:title=>'Permanent link to this comment', :href=>"#comment-#{@comment.id}"}#
 
     %h2 Leave a comment
     %form.leave{ :action => "#{request.url}/comment", :method => "post" }
@@ -73,5 +73,3 @@
         %br
         %textarea{:name => 'body', :id => 'comment_body', :style => 'width:100%', :rows => 8 }= ''
         %input{:type => 'submit', :value => 'Leave Comment'}
-
--# vim: tw=120 ts=2 sw=2 sts=0 expandtab

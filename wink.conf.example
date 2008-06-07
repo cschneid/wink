@@ -1,5 +1,14 @@
-# Wink Configuration
+# Database Configuration ====================================================
 
+Database.configure \
+  :adapter    => 'mysql',
+  :host       => 'localhost',
+  :username   => 'root',
+  :password   => '',
+  :database   => 'wink_development'
+
+
+# Wink Configuration ========================================================
 
 # The site's root URL. Note: the trailing slash should be 
 # omitted when setting this option.
@@ -24,23 +33,17 @@ set :linkings, 'Linkings'
 ## Start date for archives + copyright notice
 set :begin_date, 2008
 
+## List of filters to apply to comments (make sure the :sanitize filter
+## is included).
+#set :comment_filters, [:markdown, :sanitize]
+
 ## Where to write log messages (defaults to STDERR)
 #set :log_stream, File.open('development.log', 'ab')
 
 ## This site's Akismet key (should pair with the url option).
-set :akismet_key, 'd3cafbad'
+#set :akismet_key, 'd3cafbad'
 
 ## The del.icio.us username/password used for bookmark synchronization.
 #set :delicious, %w[username password]
-
-# Database Configuration
-
-Database.configure \
-  :adapter    => 'mysql',
-  :host       => 'localhost',
-  :username   => 'root',
-  :password   => '',
-  :database   => 'wink_development'
-
 
 # vim: ft=ruby

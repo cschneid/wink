@@ -1,13 +1,13 @@
 
 #body.index
-  - @entries.each do |entry|
-    %div{ :class => "entry #{entry.class.name.downcase}" }
+  - @entries.each do |@entry|
+    %div{ :class => "entry #{@entry.class.name.downcase}" }
       %h3
-        = entry_ref(entry)
+        = entry_ref(@entry)
       %p.meta.caps
-        = entry.created_at.strftime('%A, %B %d, %Y at %I:%M %p')
+        = @entry.created_at.strftime('%A, %B %d, %Y at %I:%M %p')
         \/ By 
         = wink.author
-        -if entry.domain
-          = "/ #{entry.domain}"
-      ~ content_filter(entry.summary, :markdown)
+        -if @entry.domain
+          = "/ #{@entry.domain}"
+      ~ entry_summary
