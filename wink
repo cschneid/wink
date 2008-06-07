@@ -37,6 +37,8 @@ if development?
       end
     end
 
+    Wink.send :remove_const, 'VERSION'
+
     # We also remove DataMapper's schema cache and subclass tracking since it keeps
     # references to the class objects we've removed above. This ensures that old
     # class objects can be GC'd.
