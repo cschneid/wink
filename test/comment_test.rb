@@ -52,6 +52,24 @@ describe 'Comment' do
     comment.author_link?.should.not.be.truthful
   end
 
+  it 'autolinks URLs when -- and only when -- only thing on line' do
+    comment = Comment.new
+
+    comment.body = "foo\nhttp://example.com/\nbar"
+    comment.body.should.be == "foo\n<http://example.com/>\nbar"
+
+    comment.body = "foo\nbar: http://example.com/\nbar"
+    comment.body.should.be == "foo\nbar: http://example.com/\nbar"
+
+    comment = Comment.new(:body => "X\nhttp://foo\nX")
+    comment.body.should.be == "X\n<http://foo>\nX"
+  end
+
+  it 'escapes comment references to prevent markdown headings' do
+    comment = Comment.new(:body => "#35 - you're wrong about that!")
+    comment.body.should.be == "\\#35 - you're wrong about that!"
+  end
+
   it 'finds only ham with ::ham' do
     Comment.should.respond_to :ham
     (1..10).each do |i|

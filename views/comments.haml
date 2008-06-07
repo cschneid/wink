@@ -20,7 +20,7 @@
           &nbsp;on&nbsp;
           = entry_ref(c.entry)
         %div.body
-          ~ sanitize(content_filter(c.body_with_links, :markdown))
+          ~ sanitize(content_filter(c.body, :markdown))
         -if admin?
           %form{:action=>"/comments/#{c.id}",:style=>'display:none'}
             %div

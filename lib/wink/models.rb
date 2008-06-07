@@ -262,7 +262,7 @@ class Comment
   property :author, :string, :size => 80
   property :ip, :string, :size => 50
   property :url, :string, :size => 255
-  property :body, :text, :nullable => false
+  property :body, :text, :nullable => false, :lazy => false
   property :created_at, :datetime, :nullable => false, :index => true
   property :referrer, :string, :size => 255
   property :user_agent, :string, :size => 255
@@ -291,12 +291,13 @@ class Comment
     body.to_s.gsub(/[\s\r\n]+/, ' ')[0..65] + " ..."
   end
 
-  def body_with_links
-    body.to_s.
-      gsub(/(^|[\s\t])(www\.\S+)/, '\1<http://\2>').
-      gsub(/(?:^|[^\]])\((https?:\/\/[^)]+)\)/, '<\1>').
-      gsub(/(^|[\s\t])(https?:\/\/\S+)/, '\1<\2>').
-      gsub(/^(\s*)(#\d+)/) { [$1, "\\", $2].join }
+  def body=(text)
+    # the first sub autolinks URLs when on line by itself; the second sub
+    # disables escapes markdown's headings when followed by a number.
+    @body = text.to_s
+    @body.gsub!(/^https?:\/\/\S+$/, '<\&>')
+    @body.gsub!(/^(\s*)(#\d+)/) { [$1, "\\", $2].join }
+    @body.gsub!(/\r/, '')
   end
 
   def url

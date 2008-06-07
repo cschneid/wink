@@ -307,7 +307,7 @@ end
 get '/comments/:id' do
   comment = Comment[params[:id].to_i]
   raise Sinatra::NotFound if comment.nil?
-  content_filter(comment.body_with_links, :markdown)
+  content_filter(comment.body, :markdown)
 end
 
 post '/writings/:slug/comment' do
