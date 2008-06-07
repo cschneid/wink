@@ -1,5 +1,4 @@
 require 'wink'
-require 'wink/akismet'
 
 class Entry
   include DataMapper::Persistence
@@ -374,7 +373,7 @@ private
 
   # Should comments be checked with Akismet before saved?
   def akismet?
-    Wink[:akismet] && production?
+    Wink.akismet_key && (production? || Wink.akismet_always)
   end
 
   # Send an Akismet request with parameters from the receiver's model. Return
@@ -397,7 +396,11 @@ private
 
   # The Wink::Akismet instance used for checking comments.
   def akismet_connection
-    @akismet_connection ||= Akismet::new(Wink[:akismet], Wink[:url])
+    @akismet_connection ||=
+      begin
+        require 'wink/akismet'
+        Wink::Akismet::new(Wink.akismet_key, Wink.akismet_url)
+      end
   end
 
 end

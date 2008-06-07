@@ -29,7 +29,16 @@ unless reloading?
   set :password, nil
 
   # The site's Akismet key, if spam detection should be performed.
-  set :akismet, nil
+  set :akismet_key, nil
+
+  # The URL of the site as registered with Akismet. Defaults to the
+  # +url+ option.
+  set :akismet_url, nil
+
+  # Boolean specifying whether Akismet checks should be performed in all
+  # environments. Default is to check w/ Akismet only when in production
+  # environment.
+  set :akismet_always, false
 
   # A del.icio.us username/password as a two-tuple: ['username', 'password'].
   # When set, del.icio.us bookmark synchronization may be performed by calling
@@ -89,6 +98,15 @@ module Wink
 
   private :method_missing
 
+
+  # Options ====================================================================
+
+  def akismet_url
+    self[:url]
+  end
+
+
+  # Configuration ==============================================================
 
   # Load configuration from the file specified and/or by executing the block. If
   # both a file and block are given, the config file is loaded first and then

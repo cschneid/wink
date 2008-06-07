@@ -75,6 +75,7 @@ module Wink
     attr_reader :key
 
     # A Hash of request headers delivered with each request.
+    attr_reader :headers
 
     # Create a new Akismet call site. The +key+ and +url+ arguments are
     # required and 

@@ -28,7 +28,7 @@ set :begin_date, 2008
 #set :log_stream, File.open('development.log', 'ab')
 
 ## This site's Akismet key (should pair with the url option).
-#set :akismet, 'd3cafbad'
+set :akismet_key, 'd3cafbad'
 
 ## The del.icio.us username/password used for bookmark synchronization.
 #set :delicious, %w[username password]
