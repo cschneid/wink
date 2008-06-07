@@ -5,10 +5,10 @@ desc: |-
   customized to support additional formats.
 type: :feature
 component: wink
-release: 
+release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-25 19:59:40.509798 Z
 references: []
 
@@ -17,4 +17,12 @@ log_events:
 - - 2008-05-25 19:59:41.293643 Z
   - Ryan Tomayko <r@tomayko.com>
   - created
+  - ""
+- - 2008-06-07 16:30:36.760835 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - assigned to release 0.2 from unassigned
+  - Simply write a helper method that takes a string and returns another.
+- - 2008-06-07 16:30:50.025122 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
   - ""

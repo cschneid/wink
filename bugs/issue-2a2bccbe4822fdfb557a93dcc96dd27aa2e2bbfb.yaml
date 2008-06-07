@@ -1,0 +1,18 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Textile filter support
+desc: Why not?
+type: :feature
+component: wink
+release: 
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :unstarted
+disposition: 
+creation_time: 2008-06-07 16:23:42.867311 Z
+references: []
+
+id: 2a2bccbe4822fdfb557a93dcc96dd27aa2e2bbfb
+log_events: 
+- - 2008-06-07 16:23:44.547491 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""

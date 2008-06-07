@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Make comment filters customizable ...
+desc: Add :comment_filters setting to wink.conf.
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-06-07 16:24:35.893070 Z
+references: []
+
+id: 9ca104aef73c7593814ed6042166716499534aa6
+log_events: 
+- - 2008-06-07 16:24:36.703294 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-06-07 16:25:26.574628 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

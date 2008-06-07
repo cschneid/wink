@@ -7,8 +7,8 @@ type: :task
 component: wink
 release: "0.2"
 reporter: Ryan Tomayko <r@tomayko.com>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2008-05-27 22:36:50.356003 Z
 references: []
 
@@ -18,3 +18,7 @@ log_events:
   - Ryan Tomayko <r@tomayko.com>
   - created
   - ""
+- - 2008-06-07 16:23:14.434328 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - Filters have been fixed up to the point where they're tolerable.

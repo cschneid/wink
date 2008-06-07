@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: Move helpers into module(s) for RDoc
+desc: We can include them into Sinatra easily enough ...
+type: :feature
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-06-07 16:28:40.485009 Z
+references: []
+
+id: 0d0c99eafaf09fb03e53118a6aa54760cd768ab1
+log_events: 
+- - 2008-06-07 16:28:42.964813 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-06-07 16:29:13.459094 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""

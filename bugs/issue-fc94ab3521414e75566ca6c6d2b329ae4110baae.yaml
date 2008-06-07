@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "Akismet fails with: \"undefined method headers\""
+desc: ""
+type: :bugfix
+component: wink
+release: "0.2"
+reporter: Ryan Tomayko <r@tomayko.com>
+status: :closed
+disposition: :fixed
+creation_time: 2008-06-07 16:26:25.056652 Z
+references: []
+
+id: fc94ab3521414e75566ca6c6d2b329ae4110baae
+log_events: 
+- - 2008-06-07 16:26:25.976543 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - created
+  - ""
+- - 2008-06-07 16:26:35.336838 Z
+  - Ryan Tomayko <r@tomayko.com>
+  - closed issue with disposition fixed
+  - ""
