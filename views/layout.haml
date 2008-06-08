@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='YOUR MOM'>
     %title= (h(@title) || wink.author)
     = feed '/feed',          "Writings"
-    = feed '/linkings/feed', "Linkings"
+    = feed wink.linkings_url + 'feed', "Linkings"
     = feed '/comments/feed', "Comments (Experimental)"
     = css "wink"
     - if development?

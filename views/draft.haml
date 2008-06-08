@@ -1,6 +1,6 @@
 #content.entry
 
-  %form#draft{ :action => '/drafts/', :method => 'POST' }
+  %form#draft{ :action => wink.drafts_url, :method => 'POST' }
     = input(:hidden, :id, @entry.id)
 
     #header

@@ -46,4 +46,11 @@ set :begin_date, 2008
 ## The del.icio.us username/password used for bookmark synchronization.
 #set :delicious, %w[username password]
 
+## URL Mapping overrides.  If you don't like /writings or any of the others, override them here.  Be sure they end in /
+#set :writings_url, "/writings/"
+#set :linkings_url, "/linkings/"
+#set :archive_url, "/circa/"
+#set :tag_url, "/topics/"
+#set :drafts_url, "/drafts/"
+
 # vim: ft=ruby

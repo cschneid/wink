@@ -63,6 +63,12 @@ unless reloading?
   # List of filters to apply to comments.
   set :comment_filters, [:markdown, :sanitize]
 
+  # URL mappings for various sections of the site
+  set :writings_url, "/writings/"
+  set :linkings_url, "/linkings/"
+  set :archive_url , "/circa/"
+  set :tag_url     , "/topics/"
+  set :drafts_url  , "/drafts/"
 end
 
 

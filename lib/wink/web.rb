@@ -128,7 +128,7 @@ module Wink::Helpers
   end
 
   def entry_url(entry)
-    entry.url || root_url('writings', entry.slug)
+    entry.url || Wink.writings_url + entry.slug
   end
 
   def entry_ref(entry, text=entry.title, *attrs)
@@ -136,7 +136,7 @@ module Wink::Helpers
   end
 
   def draft_url(entry)
-    root_url('drafts', entry.slug)
+    Wink.drafts_url + entry.slug
   end
 
   def draft_ref(entry, text, *attrs)
@@ -144,7 +144,7 @@ module Wink::Helpers
   end
 
   def topic_url(tag)
-    root_url('topics', tag.to_s)
+    Wink.tag_url + tag.to_s
   end
 
   def topic_ref(tag)
@@ -191,25 +191,25 @@ get '/' do
   haml :home
 end
 
-get '/writings/' do
+get Wink.writings_url do
   @title = wink.writings
   @entries = Article.published
   haml :home
 end
 
-get '/linkings/' do
+get Wink.linkings_url do
   @title = wink.linkings
   @entries = Bookmark.published(:limit => 100)
   haml :home
 end
 
-get '/circa/:year/' do
+get (Wink.archive_url + ':year/') do
   @title = "#{wink.author} circa #{params[:year].to_i}"
   @entries = Entry.circa(params[:year].to_i)
   haml :home
 end
 
-get '/topics/:tag' do
+get (Wink.tag_url + ':tag') do
   @title = "Regarding: '#{h(params[:tag].to_s.upcase)}'"
   @entries = Entry.tagged(params[:tag])
   @entries.reject! { |e| e.draft? }
@@ -225,7 +225,7 @@ get '/topics/:tag' do
   haml :home
 end
 
-get '/writings/:slug' do
+get (Wink.writings_url + ':slug') do
   @entry = Article.first(:slug => params[:slug])
   raise Sinatra::NotFound unless @entry
   require_administrative_privileges if @entry.draft?
@@ -234,13 +234,13 @@ get '/writings/:slug' do
   haml :entry
 end
 
-get '/drafts/' do
+get Wink.drafts_url do
   require_administrative_privileges
   @entries = Entry.drafts
   haml :home
 end
 
-get '/drafts/new' do
+get (Wink.drafts_url + 'new') do
   require_administrative_privileges
   @title = 'New Draft'
   @entry = Article.new(
@@ -251,7 +251,7 @@ get '/drafts/new' do
   haml :draft
 end
 
-post '/drafts/' do
+post Wink.drafts_url do
   require_administrative_privileges
   @entry =
     if params[:id].blank?
@@ -265,7 +265,7 @@ post '/drafts/' do
   redirect entry_url(@entry)
 end
 
-get '/drafts/:slug' do
+get (Wink.drafts_url + ':slug') do
   require_administrative_privileges
   @entry = Entry.first(:slug => params[:slug])
   raise Sinatra::NotFound unless @entry
@@ -284,7 +284,7 @@ get '/feed' do
   builder :feed, :layout => :none
 end
 
-get '/linkings/feed' do
+get Wink.linkings_url + 'feed' do
   @title = wink.linkings
   @entries = Bookmark.published(:limit => 30)
   content_type :atom, :charset => 'utf-8'
@@ -338,7 +338,7 @@ get '/comments/:id' do
   comment_body(comment)
 end
 
-post '/writings/:slug/comment' do
+post Wink.writings_url + ':slug/comment' do
   entry = Entry.first(:slug => params[:slug])
   raise Sinatra::NotFound if entry.nil?
   attributes = {
